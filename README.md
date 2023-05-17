@@ -42,6 +42,36 @@
 
 **UI tool** Figma
 
+<br>
+
+## 2-3) Git Commit Convention
+
+📌**Commit Convention**
+```
+type: Subject - body
+```
+
+<br>
+
+<img src="./readme_pic/commit_type.PNG" style="width: 300px ">
+
+<br>
+
+🐹**Subject Rule**
+
+1. 제목은 최대 50글자
+2. 마침표 및 특수기호 사용 X
+3. 첫 글자 대문자, 명령문 사용
+4. 개조식 구문으로 작성 (간결하게)
+
+<br>
+
+🐾**Body Rule**
+
+1. 한 줄당 최대 72글자
+2. 최대한 상세히 작성
+3. 어떻게 보다는 `'무엇을'`, `'왜'` 변경했는지에 대해 작성
+
 <br><br>
 
 ## 3-1) 목표 서비스
@@ -134,4 +164,4 @@
 
 
 
-## Git Commit Convention
+
