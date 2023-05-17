@@ -17,13 +17,12 @@
 # 가. 개발 기획
 
 ## 1) 개발 기간
-<hr>
+
 📅 2023.05.17 ~ 2023.05.25 (9일)
 
 <br>
 
 ## 2-1) 팀원 정보 및 업무 분담
----
 
 👩‍💻**FrontEnd** 권소정 - 💃ESFP / 🦁사자자리(8월 21일) / 🩸AO(Rh+)
 
@@ -32,7 +31,63 @@
 <br>
 
 ## 2-2) 기술 스택
----
+
+**FrontEnd** Vue / Vuex / VueBootstrap
+
+**BackEnd** Python / Django
+
+**DB** Sqlite3
+
+**UI tool** Figma
+
+<br><br>
+
+## 3-1) 목표 서비스
+- 홈화면
+
+<img src="./readme_pic/Home.png" style="width: 500px ">
+
+<br>
+
+- Movies 페이지
+
+<img src="./readme_pic/Movies.png" style="width: 500px ">
+
+<br>
+
+- 영화 디테일 페이지
+
+<img src="./readme_pic/Detail.png" style="width: 500px ">
+    
+<br>
+
+- 날씨 기반 영화 추천
+
+<img src="./readme_pic/Weather.png" style="width: 500px ">
+    
+<br>
+
+- 영화 월드컵 페이지
+
+<img src="./readme_pic/Movie_worldcup.png" style="width: 500px ">
+    
+<br>
+
+- 영화 월드컵 우승 영화 기반 추천 페이지
+
+<img src="./readme_pic/Movie_worldcup_1st.png" style="width: 500px ">
+
+<br>
+
+- 유저 프로필 페이지
+
+<img src="./readme_pic/profile.png" style="width: 500px ">
+
+<br>
+
+- 유저 프로필 페이지 > 리뷰
+
+<img src="./readme_pic/profile_content.png" style="width: 500px ">
 
 
 
