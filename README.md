@@ -91,6 +91,47 @@
 
 <img src="./readme_pic/profile_content.png" style="width: 500px ">
 
+<br><br>
+
+## 3-2) 실제 구현 정도
+
+준비중입니다..🙏
+
+<br><br>
+
+## 4) 데이터베이스 모델링(ERD)
+<img src="./readme_pic/Final_PJT_ERD.png" style="width: 500px ">
+
+<br><br>
+
+## 5) 영화 추천 알고리즘
+
+준비중입니다..🙏
+
+<br><br>
+
+## 6) 서비스 대표 기능
+
+준비중입니다..🙏
+
+<br><br>
+
+## 7) 배포 서버
+
+준비중입니다..🙏
+
+<br><br>
+
+# 나. 프로젝트 소개
+
+준비중입니다..🙏
+
+<br><br>
+
+# 다. 일지 & 느낀점
+
+**5月 17日**
+
 
 
 ## Git Commit Convention
