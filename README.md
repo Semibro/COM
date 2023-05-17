@@ -53,6 +53,8 @@ type: Subject - body
 
 <br>
 
+✏**Commit Type**
+
 <img src="./readme_pic/commit_type.PNG" style="width: 300px ">
 
 <br>
