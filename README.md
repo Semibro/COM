@@ -1,5 +1,6 @@
 # **COM🎬**
-###  'Crossroads Of Movies'의 약자로, 영화 선택의 갈림길에 서있는 "**MZ 세대**"를 위한 새로운 추천 시스템을 제공한다.
+###  'Crossroads Of Movies'의 약자로,
+### 영화 선택의 갈림길에 서있는 "**MZ 세대**"를 위한 새로운 추천 시스템을 제공한다.
 
 <img src="./readme_pic/crossroads.jpg" style="width: 500px ">
 
