@@ -34,17 +34,25 @@
 
 ## 2-2) 기술 스택
 
-**FrontEnd** Vue / Vuex / VueBootstrap
+**FrontEnd**  Vue / Vuex / VueBootstrap
 
-**BackEnd** Python / Django
+**BackEnd**  Python / Django
 
-**DB** Sqlite3
+**DB**  Sqlite3
 
-**UI tool** Figma
+**UI tool**  Figma
 
 <br>
 
-## 2-3) Git Commit Convention
+## 2-3) 코드 스타일 가이드
+
+**Python**  PEP8
+
+**Java Script**  Airbnb
+
+<br>
+
+## 2-4) Git Commit Convention
 
 📌**Commit Convention**
 ```
@@ -57,7 +65,7 @@ type: Subject - body
 
 <img src="./readme_pic/commit_type.PNG" style="width: 300px ">
 
-<br>
+<br><br>
 
 🐹**Subject Rule**
 
@@ -164,6 +172,8 @@ type: Subject - body
 
 **5月 17日**
 
+목업 만들기 완료
 
+ERD 작성 완료
 
-
+C
