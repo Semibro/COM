@@ -150,9 +150,7 @@ type: Subject - body
 |---|---|---|
 ||`admin`|admin.site.urls|
 ||`movies/`|include('movies.urls')|
-||`profile/`|include('accounts.urls')|
-||`accounts/`|include('')|
-||`accounts/signup`|include('')|
+||`accounts/`|include('accounts.urls')|
 
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
