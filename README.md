@@ -139,8 +139,23 @@ type: Subject - body
 
 <br><br>
 
-## 4) 데이터베이스 모델링(ERD)
+## 4-1) 데이터베이스 모델링(ERD)
 <img src="./readme_pic/Final_PJT_ERD.png" style="width: 500px ">
+
+<br>
+
+## 4-2) API 설계
+
+|HTTP verb|URL 패턴|설명|
+|---|---|---|
+||`admin`|admin.site.urls|
+||`movies/`|include('movies.urls')|
+||`profile/`|include('accounts.urls')|
+||`accounts/`|include('')|
+||`accounts/signup`|include('')|
+
+|HTTP verb|URL 패턴|설명|
+|---|---|---|
 
 <br><br>
 
