@@ -23,11 +23,11 @@ def movie_detail(request, movie_pk):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def review_list(request):
-    reviews = get_list_or_404(Reviews)
-    serializer = ReviewListSerializer(reviews, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def review_list(request):
+#     reviews = get_list_or_404(Reviews)
+#     serializer = ReviewListSerializer(reviews, many=True)
+#     return Response(serializer.data)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
