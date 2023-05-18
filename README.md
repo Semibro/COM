@@ -162,6 +162,19 @@ type: Subject - body
 **accounts url**
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
+|GET POST|`accounts/signup/`|회원가입 페이지|
+|GET POST|`accounts/login/`|로그인 페이지|
+|POST|`accounts/logout/`|로그아웃|
+||`accounts/profile/<username>/`|유저 프로필 페이지|
+|POST|`accounts/<int:user_pk>/follow/`|유저 팔로우|
+
+**reviews url**
+|HTTP verb|URL 패턴|설명|
+|---|---|---|
+|GET|`reviews/`|리뷰 목록|
+|GET POST|`reviews/create/`|리뷰 작성|
+|GET|`reviews/<int:review_pk>/`|리뷰 상세|
+|POST|`reviews/<int:review_pk>/comments/create/`|리뷰 댓글|
 
 <br><br>
 
