@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import *
+from reviews.models import *
 
 
 User = get_user_model()
@@ -11,6 +12,47 @@ class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movies
         fields = ('pk', 'title', 'overview', 'vote_average')
+
+
+# 리뷰
+class ReviewSerializer(serializers.ModelSerializer):
+    
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = ('pk', 'username')
+
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Reviews
+        fields = '__all__'
+        read_only_fields = ('movie',)
+
+
+# 리뷰 리스트
+class ReviewListSerializer(serializers.ModelSerializer):
+     
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = ('pk', 'username')
+
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Reviews
+        fields = ('pk', 'rate', 'user', 'content', 'created_at', 'updated_at')
+
+
+# 리뷰 디테일
+class ReviewDetailSerializer(ReviewSerializer):
+    movie_title = serializers.CharField(source='movie.title', read_only=True)
+
+    class Meta(ReviewSerializer.Meta):
+        fields = ReviewSerializer.Meta.fields + (
+            'movie_title',
+        )
 
 
 # 리뷰의 댓글
@@ -49,39 +91,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('pk', 'nickname')  # hotfix
 
 
-# 리뷰
-class ReviewSerializer(serializers.ModelSerializer):
-    
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    user = UserSerializer(read_only=True)
-
-    class Meta:
-        model = Reviews
-        fields = '__all__'
-        read_only_fields = ('movie',)
-
-
-# 리뷰 리스트
-class ReviewListSerializer(serializers.ModelSerializer):
-     
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    user = UserSerializer(read_only=True)
-
-    class Meta:
-        model = Reviews
-        fields = ('pk', 'rate', 'user', 'content', 'created_at', 'updated_at')
 
 
 # 영화 디테일
-class MovieSerialzier(serializers.ModelSerializer):
+class MovieSerializer(serializers.ModelSerializer):
 
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
