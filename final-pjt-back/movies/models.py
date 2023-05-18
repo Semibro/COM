@@ -16,7 +16,7 @@ class Movies(models.Model):
 
 
 class Credits(models.Model):
-    movie_id = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movies, on_delete=models.CASCADE)
     director_name = models.CharField(max_length=100)
     director_profile_path = models.TextField(null=True)
     actor_name_1 = models.CharField(max_length=100, null=True)
@@ -26,17 +26,16 @@ class Credits(models.Model):
 
 
 class Reviews(models.Model):
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
-    movie_id = models.ForeignKey(Movies, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
+    movie = models.ForeignKey(Movies, on_delete=models.CASCADE, related_name='reviews')
     rate = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(5)])
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
 
 
 class Comments(models.Model):
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
-    review_id = models.ForeignKey(Reviews, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
+    review = models.ForeignKey(Reviews, on_delete=models.CASCADE, related_name='comments')
     comments = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
