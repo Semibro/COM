@@ -1,51 +1,20 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
 from .models import *
-from reviews.models import *
 
 
-User = get_user_model()
-
-
-# 영화리스트
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movies
-        fields = ('pk', 'title', 'overview', 'vote_average')
+        fields = ('title', 'overview',)
 
 
-# 리뷰
 class ReviewSerializer(serializers.ModelSerializer):
-    
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Reviews
-        fields = '__all__'
-        read_only_fields = ('movie',)
+        fields = ('id', 'title', 'content',)
 
 
-# 리뷰 리스트
-class ReviewListSerializer(serializers.ModelSerializer):
-     
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    user = UserSerializer(read_only=True)
-
-    class Meta:
-        model = Reviews
-        fields = ('pk', 'rate', 'user', 'content', 'created_at', 'updated_at')
-
-
-# 리뷰 디테일
 class ReviewDetailSerializer(ReviewSerializer):
     movie_title = serializers.CharField(source='movie.title', read_only=True)
 
@@ -54,77 +23,21 @@ class ReviewDetailSerializer(ReviewSerializer):
             'movie_title',
         )
 
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['movie'] = rep.pop('movie_title', [])
+        return rep
 
-# 리뷰의 댓글
-class CommentSerializer(serializers.ModelSerializer):
 
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
+class MovieDetailSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer(read_only=True)
-
-    class ReviewSerializer(serializers.ModelSerializer):
+    class ReviewContentSerializer(serializers.ModelSerializer):
         class Meta:
             model = Reviews
-            fields = ('pk')
+            fields = ('title', 'content',)
 
-    review = ReviewSerializer(read_only=True)
-
-    class Meta:
-        model = Comments
-        fields = ('pk', 'user', 'review', 'comments', 'created_at')
-
-
-# 영화 추천 리스트
-class RecommendMovieListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movies
-        fields = ('pk', 'title', 'poster_path')
-
-
-# 유저
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('pk', 'nickname')  # hotfix
-
-
-
-
-# 영화 디테일
-class MovieSerializer(serializers.ModelSerializer):
-
-    class UserSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = User
-            fields = ('pk', 'username')
-
-    user = UserSerializer(read_only=True)
-
-    class CreditSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Credits
-            fields = '__all__'
-
-    credits = CreditSerializer(read_only=True, many=True)
+    review_set = ReviewContentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movies
-        exclude = ('like_users')
-
-
-# 좋아요 누른 영화 리스트
-class UserLikeMovieListSerialzier(serializers.ModelSerializer):
-    
-    class MovieSerializer(serializers.ModelSerializer):
-        class Meta:
-            model = Movies
-            fields = ('pk', 'title', 'poster_path')
-
-    like_movies = MovieSerializer(many=True)
-
-    class Meta:
-        model = User
-        fields = ('pk', 'username', 'like_movies')
+        fields = '__all__'
