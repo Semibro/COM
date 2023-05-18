@@ -146,12 +146,20 @@ type: Subject - body
 
 ## 4-2) API 설계
 
+**final_pjt url**
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
 ||`admin`|admin.site.urls|
 ||`movies/`|include('movies.urls')|
 ||`accounts/`|include('accounts.urls')|
 
+**movies url**
+|HTTP verb|URL 패턴|설명|
+|---|---|---|
+|GET|`movies/`|영화 페이지|
+|GET|`movies/<int:movie_pk>/`|단일 영화 조회|
+
+**accounts url**
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
 
