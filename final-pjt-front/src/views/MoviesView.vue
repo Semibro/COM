@@ -1,6 +1,6 @@
 <template>
   <div>
-    당신이 좋아하는 "{{ randomMovieTitle }}" 과 비슷한 영화를 준비했어요!
+    취향저격 콘텐츠:
     <RecommendMovieCard
       v-for="(movie, index) in recommendMoviesList" :key="index"
       :movie="movie"
