@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <p class="hero">
+      <img src="@/assets/background_img/hero.png">
+    </p>
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <HelloWorld msg="모든 인류 구성원의 천부의"/>
   </div>
@@ -30,3 +33,23 @@ export default {
   }
 }
 </script>
+
+<style>
+.home {
+}
+
+.hero {
+  position: absolute; top: 0; left: 0;
+  animation: shake 2.5s;
+  animation-iteration-count: infinite;
+  z-index: 0;
+}
+
+@keyframes shake {
+  0% { transform: translate(0px, 10px) rotate(0deg); }
+  
+  50% { transform: translate(0px, 0px) rotate(0deg); }
+  
+  100% { transform: translate(0px, 10px) rotate(0deg); }
+}
+</style>
