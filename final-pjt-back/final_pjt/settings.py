@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'requests',
     # Django Apps
     'movies',
     'accounts',

@@ -1,30 +1,30 @@
 from rest_framework import serializers
-from .models import Article, Comment
+from .models import Movie, Review
 
 
-class ArticleListSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source='user.username', read_only=True)
-
-    class Meta:
-        model = Article
-        # fields = ('id', 'title', 'content')
-        fields = ('id', 'title', 'content', 'user', 'username')
-
-
-class CommentSerializer(serializers.ModelSerializer):
+class MovieListSerializer(serializers.ModelSerializer):
+    # username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
-        model = Comment
+        model = Movie
         fields = '__all__'
-        read_only_fields = ('article',)
+        # fields = ('id', 'title', 'overview', 'username')
 
 
-class ArticleSerializer(serializers.ModelSerializer):
-    comment_set = CommentSerializer(many=True, read_only=True)
-    comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
+# class CommentSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = Comment
+#         fields = '__all__'
+#         read_only_fields = ('review',)
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    # comment_set = CommentSerializer(many=True, read_only=True)
+    # comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
-        model = Article
+        model = Review
         fields = '__all__'
         read_only_fields = ('user', )
