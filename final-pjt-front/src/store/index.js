@@ -21,6 +21,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SIGN_UP(state, token) {
+      state.token = token
+      router.push({name: 'likemoviechoose'})
+    },
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({name: 'home'})
@@ -40,7 +44,7 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
-          context.commit('SAVE_TOKEN', res.data.key)
+          context.commit('SIGN_UP', res.data.key)
         })
         .catch(err => console.log(err))
     },
