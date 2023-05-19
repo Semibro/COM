@@ -31,7 +31,7 @@ export default {
     })
       .then(res => {
         this.movieList = res.data.results
-        console.log(this.movieList)
+        // console.log(this.movieList)
       })
       .catch(err => console.log(err))
   },

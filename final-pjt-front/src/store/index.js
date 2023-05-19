@@ -14,6 +14,7 @@ export default new Vuex.Store({
   ],
   state: {
     token: null,
+    likeMovieList: [],
   },
   getters: {
     isLogin(state) {
@@ -28,6 +29,19 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({name: 'home'})
+    },
+    ADD_LIKE_MOVIE(state, movie) {
+      let flag = false
+      for (let i = 0; i < state.likeMovieList.length; i++) {
+        if (movie.id === state.likeMovieList[i].id) {
+          flag = true
+          break
+        }
+      }
+      if (!flag) {
+        state.likeMovieList.push(movie)
+        console.log(state.likeMovieList)
+      }
     }
   },
   actions: {
@@ -62,6 +76,9 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
         })
         .catch(err => console.log(err))
+    },
+    addLikeMovie(context, movie) {
+      context.commit('ADD_LIKE_MOVIE', movie)
     }
   },
   modules: {

@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="movieCard">
-        <div class="movieimgbox">
+        <div class="movieimgbox" @click="addLikeMovie(movie)">
           <img :src="imgurl" class="movieimg">
         </div>
         <div class="text">
@@ -37,6 +37,11 @@ export default {
     },
     movie_rate() {
       return Math.round(this.movie.vote_average / 2)
+    }
+  },
+  methods: {
+    addLikeMovie(movie) {
+      this.$store.dispatch('addLikeMovie', movie)
     }
   }
 }
