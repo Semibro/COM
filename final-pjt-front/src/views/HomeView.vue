@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 

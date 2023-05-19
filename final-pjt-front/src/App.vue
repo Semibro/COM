@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import fullscreen from 'vue-fullscreen'
 import Vue from 'vue'
 
