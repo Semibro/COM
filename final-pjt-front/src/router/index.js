@@ -6,6 +6,7 @@ import LoginView from '@/views/LoginView'
 import SignupView from '@/views/SignupView'
 import ProfileView from '@/views/ProfileView'
 import LikeMovieChooseView from '@/views/LikeMovieChooseView'
+import MovieDetailView from '@/views/MovieDetailView'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/likemoviechoose',
     name: 'likemoviechoose',
     component: LikeMovieChooseView
+  },
+  {
+    path: '/movies/:id',
+    name: 'moviedetail',
+    component: MovieDetailView
   },
 ]
 
