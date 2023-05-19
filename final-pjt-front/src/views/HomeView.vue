@@ -11,6 +11,8 @@
 <script>
 import axios from 'axios'
 
+API_URL = 'http://127.0.0.1:8000/'
+
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 

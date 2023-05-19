@@ -19,6 +19,7 @@ import axios from 'axios'
 import fullscreen from 'vue-fullscreen'
 import Vue from 'vue'
 
+API_URL = 'http://127.0.0.1:8000/'
 Vue.use(fullscreen)
 
 export default {
