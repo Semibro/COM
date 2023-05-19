@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- {{ likeMovieList }} -->
+    
   </div>
 </template>
 
@@ -12,7 +12,10 @@ export default {
   computed: {
     likeMovieList() {
       return this.$store.state.likeMovieList
-    }
+    },
+    // recommendMovies() {
+    //   return this.$store.state.recommendMovies
+    // }
   },
   methods: {
     recommendMovies() {

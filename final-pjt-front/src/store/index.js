@@ -18,7 +18,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     likeMovieList: [],
-    recommendMovies: [],
+    recommendMovies: null,
   },
   getters: {
     isLogin(state) {
@@ -53,7 +53,8 @@ export default new Vuex.Store({
         url: `https://api.themoviedb.org/3/movie/${randommovie}/recommendations?language=ko-KR&page=1&api_key=${API_KEY}`
       })
         .then(res => {
-          state.recommendMovies.push(res)
+          // console.log(res)
+          state.recommendMovies.push(res.data.results)
           console.log(state.recommendMovies)
         })
         .catch(err => console.log(err))
