@@ -158,6 +158,8 @@ type: Subject - body
 |---|---|---|
 |GET|`movies/`|영화 페이지|
 |GET|`movies/<int:movie_pk>/`|단일 영화 조회|
+|POST|`movies/<int:movie_pk>/reviews/`|리뷰 작성|
+|GET PUT DELETE|`movies/reviews/<int:review_pk>`|리뷰 상세 페이지|
 
 **accounts url**
 |HTTP verb|URL 패턴|설명|
@@ -167,14 +169,6 @@ type: Subject - body
 |POST|`accounts/logout/`|로그아웃|
 ||`accounts/profile/<username>/`|유저 프로필 페이지|
 |POST|`accounts/<int:user_pk>/follow/`|유저 팔로우|
-
-**reviews url**
-|HTTP verb|URL 패턴|설명|
-|---|---|---|
-|GET|`reviews/`|리뷰 목록|
-|GET POST|`reviews/create/`|리뷰 작성|
-|GET|`reviews/<int:review_pk>/`|리뷰 상세|
-|POST|`reviews/<int:review_pk>/comments/create/`|리뷰 댓글|
 
 <br><br>
 
