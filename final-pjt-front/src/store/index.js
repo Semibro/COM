@@ -3,8 +3,11 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 import router from '../router'
+// import _ from 'lodash'
 
 const API_URL = 'http://127.0.0.1:8000'
+const API_KEY = 'b87676597510090177f5217ea5f4d280'
+
 
 Vue.use(Vuex)
 
@@ -15,11 +18,12 @@ export default new Vuex.Store({
   state: {
     token: null,
     likeMovieList: [],
+    recommendMovies: [],
   },
   getters: {
     isLogin(state) {
       return state.token ? true : false
-    }
+    },
   },
   mutations: {
     SIGN_UP(state, token) {
@@ -42,6 +46,17 @@ export default new Vuex.Store({
         state.likeMovieList.push(movie)
         console.log(state.likeMovieList)
       }
+    },
+    RECOMMEND_MOVIES(state, randommovie) {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${randommovie}/recommendations?language=ko-KR&page=1&api_key=${API_KEY}`
+      })
+        .then(res => {
+          state.recommendMovies.push(res)
+          console.log(state.recommendMovies)
+        })
+        .catch(err => console.log(err))
     }
   },
   actions: {
@@ -79,7 +94,10 @@ export default new Vuex.Store({
     },
     addLikeMovie(context, movie) {
       context.commit('ADD_LIKE_MOVIE', movie)
-    }
+    },
+    recommendMovies(context, randommovie) {
+      context.commit('RECOMMEND_MOVIES', randommovie)
+    } 
   },
   modules: {
   }
