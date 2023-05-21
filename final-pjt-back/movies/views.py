@@ -62,8 +62,8 @@ def movie_detail(request, movie_pk):
                 name=re['name'],
                 profile_path=re['profile_path'])
                 movie.save()
-        for re in response['crew'] and count == 2:
-            if re['id'] not in saved_movies:
+        for re in response['crew']:
+            if re['id'] not in saved_movies and count == 2:
                 movie = Credits(
                 id=re['id'],
                 known_for_department=re['known_for_department'],
