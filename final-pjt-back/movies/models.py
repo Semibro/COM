@@ -26,8 +26,16 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-# class Comment(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-#     content = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
+class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Credits(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    known_for_department = models.TextField()
+    name = models.TextField()
+    profile_path = models.TextField(null=True)

@@ -1,18 +1,23 @@
 <template>
   <div>
-    {{ popularMovieList }}
+    <h1>지금 인기있는 영화:</h1>
+    <PopularMovieList 
+      v-for="(movie, index) in popularMovies" :key="index"
+      :movie="movie"
+    />
   </div>
 </template>
 
 <script>
-
+import PopularMovieList from '@/components/PopularMovieList'
 
 export default {
   name: 'MoviesView',
   components: {
+    PopularMovieList,
   },
   computed: {
-    popularMovieList() {
+    popularMovies() {
       return this.$store.state.popularMovies
     }
   },

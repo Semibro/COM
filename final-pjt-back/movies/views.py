@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .serializers import MovieListSerializer, ReviewSerializer
-from .models import Movie, Review
+from .serializers import MovieListSerializer, ReviewSerializer, CreditSerializer
+from .models import Movie, Review, Credits
 import requests
 
 
@@ -28,8 +28,8 @@ headers = {
 @api_view(['GET', 'POST'])
 def movie_list(request):
     for i in range(1,4):
-        listurl = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
-        response = requests.get(listurl, headers=headers).json()
+        popular_url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
+        response = requests.get(popular_url, headers=headers).json()
         saved_movies = Movie.objects.values_list('title', flat=True)
         for re in response['results']:
             if re['title'] not in saved_movies:
@@ -44,11 +44,26 @@ def movie_list(request):
                 movie.save()
     movies = get_list_or_404(Movie)
     serializer = MovieListSerializer(movies, many=True)
-        # print(movies)
     return Response(serializer.data)
 
-def movie_detail(request):
-    pass
+@api_view(['GET'])
+def movie_detail(request, movie_pk):
+    if request:
+        credits_url = f"https://api.themoviedb.org/3/movie/{movie_pk}/credits?language=ko-KR"
+        response = requests.get(credits_url, headers=headers).json()
+        saved_movies = Credits.objects.values_list('id', flat=True)
+        for re in response['cast']:
+            if re['id'] not in saved_movies:
+                movie = Credits(
+                id=re['id'],
+                known_for_department=re['known_for_department'],
+                name=re['name'],
+                profile_path=re['profile_path'])
+                movie.save()
+        movies = get_list_or_404(Credits)
+        serializer = CreditSerializer(movies, many=True)
+        return Response(serializer.data)
+
 
 def review_list(request):
     pass
