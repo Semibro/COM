@@ -33,7 +33,9 @@ def movie_list(request):
         saved_movies = Movie.objects.values_list('title', flat=True)
         for re in response['results']:
             if re['title'] not in saved_movies:
-                movie = Movie(title=re['title'],
+                movie = Movie(
+                id = re['id'],
+                title=re['title'],
                 overview=re['overview'],
                 poster_path=re['poster_path'],
                 release_date=re['release_date'],

@@ -7,6 +7,8 @@ import datetime
 # Create your models here.
 class Movie(models.Model):
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
     title = models.CharField(max_length=100)
     overview = models.TextField()
     poster_path = models.TextField(null=True)
