@@ -17,19 +17,19 @@ headers = {
 
 
 # Create your views here.
-@api_view(['GET', 'POST'])
-def movie_list(request):
-    if request.method == 'GET':
-        movies = get_list_or_404(Movie)
-        serializer = MovieListSerializer(movies, many=True)
-        return Response(serializer.data)
+# @api_view(['GET', 'POST'])
+# def movie_list(request):
+#     if request.method == 'GET':
+#         movies = get_list_or_404(Movie)
+#         serializer = MovieListSerializer(movies, many=True)
+#         return Response(serializer.data)
     
 
-def test(request):
+@api_view(['GET', 'POST'])
+def movie_list(request):
     for i in range(1,4):
         listurl = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
         response = requests.get(listurl, headers=headers).json()
-        movies = []
         saved_movies = Movie.objects.values_list('title', flat=True)
         for re in response['results']:
             if re['title'] not in saved_movies:
@@ -40,9 +40,9 @@ def test(request):
                 vote_average=re['vote_average'],
                 vote_count=re['vote_count'])
                 movie.save()
-                movies += [movie]
-        serializer = MovieListSerializer(movies, many=True)
-        print(movies)
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies, many=True)
+        # print(movies)
     return Response(serializer.data)
 
 def movie_detail(request):

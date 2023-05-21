@@ -19,6 +19,7 @@ export default new Vuex.Store({
     token: null,
     likeMovieList: [],
     recommendMovies: null,
+    popularMovies: null,
   },
   getters: {
     isLogin(state) {
@@ -55,9 +56,13 @@ export default new Vuex.Store({
         .then(res => {
           // console.log(res)
           state.recommendMovies = res.data.results
-          console.log(state.recommendMovies)
+          // console.log(state.recommendMovies)
         })
         .catch(err => console.log(err))
+    },
+    GET_POPULAR_MOVIES(state, movies) {
+      state.popularMovies = movies
+      console.log(state.popularMovies)
     }
   },
   actions: {
@@ -98,7 +103,18 @@ export default new Vuex.Store({
     },
     recommendMovies(context, randommovie) {
       context.commit('RECOMMEND_MOVIES', randommovie)
-    } 
+    },
+    getPopularMovies(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/`,
+      })
+        .then(res => {
+          // console.log(res, context)
+          context.commit('GET_POPULAR_MOVIES', res.data)
+        })
+        .catch(err => console.log(err))
+    }
   },
   modules: {
   }
