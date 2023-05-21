@@ -52,10 +52,8 @@ def movie_detail(request, movie_pk):
         credits_url = f"https://api.themoviedb.org/3/movie/{movie_pk}/credits?language=ko-KR"
         response = requests.get(credits_url, headers=headers).json()
         saved_movies = Credits.objects.values_list('id', flat=True)
-        count = 0
         for re in response['cast']:
-            if re['id'] not in saved_movies and count < 2:
-                count += 1
+            if re['id'] not in saved_movies:
                 movie = Credits(
                 id=re['id'],
                 known_for_department=re['known_for_department'],
@@ -63,7 +61,7 @@ def movie_detail(request, movie_pk):
                 profile_path=re['profile_path'])
                 movie.save()
         for re in response['crew']:
-            if re['id'] not in saved_movies and count == 2:
+            if re['id'] not in saved_movies:
                 movie = Credits(
                 id=re['id'],
                 known_for_department=re['known_for_department'],
