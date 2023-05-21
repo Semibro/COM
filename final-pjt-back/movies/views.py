@@ -29,18 +29,20 @@ def test(request):
     for i in range(1,4):
         listurl = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
         response = requests.get(listurl, headers=headers).json()
-        print(response)
         movies = []
+        saved_movies = Movie.objects.values_list('title', flat=True)
         for re in response['results']:
-            movie = Movie(title=re['title'],
-                          overview=re['overview'],
-                          poster_path=re['poster_path'],
-                          release_date=re['release_date'],
-                          vote_average=re['vote_average'],
-                          vote_count=re['vote_count'])
-            movie.save()
-            movies += [movie]
+            if re['title'] not in saved_movies:
+                movie = Movie(title=re['title'],
+                overview=re['overview'],
+                poster_path=re['poster_path'],
+                release_date=re['release_date'],
+                vote_average=re['vote_average'],
+                vote_count=re['vote_count'])
+                movie.save()
+                movies += [movie]
         serializer = MovieListSerializer(movies, many=True)
+        print(movies)
     return Response(serializer.data)
 
 def movie_detail(request):
