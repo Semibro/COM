@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: 'MovieDetailView'
+  name: 'MovieDetailView',
+  created() {
+    this.$store.dispatch('getCreditList', this.$route.params.id)
+  }
 }
 </script>
 

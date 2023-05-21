@@ -20,6 +20,7 @@ export default new Vuex.Store({
     likeMovieList: [],
     recommendMovies: null,
     popularMovies: null,
+    creditList: null,
   },
   getters: {
     isLogin(state) {
@@ -112,6 +113,17 @@ export default new Vuex.Store({
         .then(res => {
           // console.log(res, context)
           context.commit('GET_POPULAR_MOVIES', res.data)
+        })
+        .catch(err => console.log(err))
+    },
+    getCreditList(context, id) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${id}/`
+      })
+        .then(res => {
+          console.log(res)
+          context.commit('GET_CREDIT_LIST', id)
         })
         .catch(err => console.log(err))
     }
