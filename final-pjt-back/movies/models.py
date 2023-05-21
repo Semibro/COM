@@ -39,3 +39,19 @@ class Credits(models.Model):
     known_for_department = models.TextField()
     name = models.TextField()
     profile_path = models.TextField(null=True)
+
+
+class Detail(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    title = models.TextField()
+    overview = models.TextField()
+    poster_path = models.TextField()
+    release_date = models.DateField(null=True, default=datetime.date.today)
+
+
+class Recommend(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    title = models.TextField()
+    poster_path = models.TextField()

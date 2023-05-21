@@ -1,6 +1,6 @@
 from django.test import TestCase
 import requests
-from movies.models import Movie
+from .models import Movie
 # Create your tests here.
 
 
@@ -10,18 +10,18 @@ headers = {
 }
 
 
-for i in range(1,4):
-    listurl = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
-    response = requests.get(listurl, headers=headers).json()
-    movies = []
-    # saved_movies = Movie.objects.values_list('title', flat=True)
+for i in range(1,6):
+    popular_url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={i}"
+    response = requests.get(popular_url, headers=headers).json()
+    saved_movies = Movie.objects.values_list('id', flat=True)
     for re in response['results']:
-        # if re['title'] not in saved_movies:
-            movie = Movie(title=re['title'],
+        if re['id'] not in saved_movies:
+            movie = Movie(
+            id = re['id'],
+            title=re['title'],
             overview=re['overview'],
             poster_path=re['poster_path'],
             release_date=re['release_date'],
             vote_average=re['vote_average'],
             vote_count=re['vote_count'])
             movie.save()
-    print(movies)
