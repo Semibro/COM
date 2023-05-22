@@ -15,6 +15,7 @@ export default new Vuex.Store({
   state: {
     popularMovies: null,
     detail_movie: null,
+    user_info: null,
   },
   getters: {
   },
@@ -36,6 +37,9 @@ export default new Vuex.Store({
         }
       })
     },
+    GET_USER_INFO(state, info) {
+      state.user_info = info
+    }
   },
   actions: {
     signUp(context, payload) {
@@ -72,6 +76,20 @@ export default new Vuex.Store({
     toDetail(context, id) {
       context.commit('TO_DETAIL', id)
     },
+    getUserInfo(context) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(res => {
+          context.commit('GET_USER_INFO', res.data)
+        })
+        .catch(err => console.log(err))
+    }
   },
   modules: {
   }

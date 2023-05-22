@@ -4,6 +4,7 @@
       <span v-if="isLogin">
         <router-link to="/">Home</router-link> |
         <router-link to="/movies">Movies</router-link> |
+        <router-link :to="{ name: 'profile', params: { username: username } }">Profile</router-link> |
         <router-link to="/#" @click.native="logout">Logout</router-link> |
       </span>
 
@@ -26,6 +27,11 @@ export default {
       isLogin: false,
     }
   },
+  computed: {
+    username() {
+      return this.$store.state.user_info.username
+    }
+  },
   methods: {
     logout() {
       this.isLogin = false
@@ -38,6 +44,7 @@ export default {
     if (token) {
       this.isLogin = true
     }
+    this.$store.dispatch('getUserInfo')
   },
 }
 </script>
