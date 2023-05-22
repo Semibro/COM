@@ -14,24 +14,31 @@
         <router-link to="/signup">Signup</router-link>
       </span>
     </nav>
-    <router-view/>
+    <router-view @login="isLogin=true" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  computed: {
-    isLogin() {
-      return this.$store.getters.isLogin
+  data() {
+    return {
+      isLogin: false,
     }
   },
   methods: {
     logout() {
-      this.$store.state.token = null
+      this.isLogin = false
+      localStorage.removeItem('jwt')
       this.$router.push({ name: 'login' })
     }
-  }
+  },
+  created() {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.isLogin = true
+    }
+  },
 }
 </script>
 

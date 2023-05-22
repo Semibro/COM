@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'LoginView',
   data() {
@@ -30,7 +32,19 @@ export default {
       const payload = {
         username, password
       }
-      this.$store.dispatch('logIn', payload)
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8000/api/token/',
+        data: payload,
+      })
+      .then(res => {
+        localStorage.setItem('jwt', res.data.access)
+        this.$emit('login')
+        this.$router.push({name: 'home'})
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 }
