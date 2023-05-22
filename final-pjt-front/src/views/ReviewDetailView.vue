@@ -1,12 +1,14 @@
 <template>
   <div>
     {{ review }}
+    <button @click="deleteReview(review.id)">DELETE</button>
     <form @submit.prevent="createComment">
       <label for="content">내용 : </label>
      <input type="text" v-model="inputdata">
     </form>
     <div v-for="(comment, index) in comments" :key="index">
       {{ comment.user }} : {{ comment.content }}
+      <button @click="deleteComment(comment.id)">DELETE</button>
     </div>
   </div>
 </template>
@@ -73,6 +75,39 @@ export default {
       })
         .then(res => {
           this.comments = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteComment(id) {
+     const token = localStorage.getItem('jwt')
+      axios({
+        method: 'delete',
+        url: `${API_URL}/movies/${this.$route.params.movie_id}/${this.$route.params.review_id}/comment/${id}/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(() => {
+          this.getCommentList()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteReview(id) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'delete',
+        url: `${API_URL}/movies/${this.$route.params.movie_id}/${id}/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(() => {
+          const movie_id = {id: this.$route.params.movie_id}
+          this.$router.push({name: 'detail', params: movie_id})
         })
         .catch(err => {
           console.log(err)
