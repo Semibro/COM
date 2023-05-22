@@ -21,7 +21,7 @@ class Movie(models.Model):
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    rate = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(5)])
+    rate = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(5)], null=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -3,7 +3,10 @@
     <h1>영화 디테일 페이지</h1>
     {{ detail_movie }}
     <br>
-    <input type="text" v-model="inputdata" @keyup.enter="createReview">
+    <form @submit.prevent="createReview">
+      <label for="content">내용 : </label>
+     <input type="text" v-model="inputdata">
+    </form>
   </div>
 </template>
 
@@ -34,13 +37,14 @@ export default {
       axios({
         method: 'post',
         url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
-        data: {content},
+        data: { content },
         headers: {
           Authorization: `Bearer ${ token }`
         }
       })
         .then(res => {
             console.log(res)
+            console.log(this.$route.params)
         })
         .catch(err => console.log(err))
     }

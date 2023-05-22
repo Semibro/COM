@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .serializers import PopularMovieListSerializer, ReviewListSerializer, ReviewDetailSerializer, ReviewSerializer, CommentListSerializer
+from .serializers import *
 from .models import Movie, Review, Comment
 
 import requests
@@ -46,12 +46,12 @@ def movie_list(request):
 # review / comment
 @api_view(['POST', 'GET'])
 def review_create_or_list(request, movie_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
-    review = movie.review_set.get()
+    movie = get_object_or_404(Movie, id=movie_pk)
+    review = movie.review_set.all()
     if request.method == 'POST':
-        serializer = ReviewSerializer(data=request.data)
+        serializer = ReviewCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(movie=movie)
+            serializer.save(user=request.user, movie=movie)
             return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'GET':
         serializer = ReviewListSerializer(review, many=True)
