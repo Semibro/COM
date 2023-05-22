@@ -17,9 +17,35 @@ class Movie(models.Model):
     vote_count = models.IntegerField(null=True)
 
 
+class Credits(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    known_for_department = models.TextField()
+    name = models.TextField()
+    profile_path = models.TextField(null=True)
+    movie = models.ManyToManyField(Movie)
+
+class Detail(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    title = models.TextField()
+    overview = models.TextField()
+    poster_path = models.TextField()
+    release_date = models.DateField(null=True, default=datetime.date.today)
+    movie = models.ManyToManyField(Movie)
+
+
+class Recommend(models.Model):
+    listId = models.IntegerField(primary_key=True)
+    id = models.IntegerField()
+    title = models.TextField()
+    poster_path = models.TextField()
+    movie = models.ManyToManyField(Movie)
+
+
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    # movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rate = models.IntegerField(validators=[MinLengthValidator(1), MaxLengthValidator(5)])
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,27 +57,3 @@ class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
-
-class Credits(models.Model):
-    listId = models.IntegerField(primary_key=True)
-    id = models.IntegerField()
-    known_for_department = models.TextField()
-    name = models.TextField()
-    profile_path = models.TextField(null=True)
-
-
-class Detail(models.Model):
-    listId = models.IntegerField(primary_key=True)
-    id = models.IntegerField()
-    title = models.TextField()
-    overview = models.TextField()
-    poster_path = models.TextField()
-    release_date = models.DateField(null=True, default=datetime.date.today)
-
-
-class Recommend(models.Model):
-    listId = models.IntegerField(primary_key=True)
-    id = models.IntegerField()
-    title = models.TextField()
-    poster_path = models.TextField()
