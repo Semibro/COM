@@ -13,25 +13,28 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    token: null,
     popularMovies: null,
+    detail_movie: null,
   },
   getters: {
-    // isLogin(state) {
-    //   return state.token ? true : false
-    // },
   },
   mutations: {
     SIGN_UP(state, token) {
       state.token = token
       // router.push({name: 'likemoviechoose'})
     },
-    // SAVE_TOKEN(state, token) {
-    //   state.token = token
-    //   router.push({name: 'home'})
-    // },
     GET_POPULAR_MOVIES(state, movies) {
       state.popularMovies = movies
+    },
+    TO_DETAIL(state, id) {
+      let count = 0
+      state.popularMovies.forEach(movie => {
+        if (movie.id === id) {
+          state.detail_movie = state.popularMovies[count]
+        } else {
+          count ++
+        }
+      });
     },
   },
   actions: {
@@ -53,15 +56,22 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     getPopularMovies(context) {
+      const token = localStorage.getItem('jwt')
       axios({
         method: 'get',
         url: `${API_URL}/movies/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
       })
         .then(res => {
           context.commit('GET_POPULAR_MOVIES', res.data)
         })
         .catch(err => console.log(err))
     },
+    toDetail(context, id) {
+      context.commit('TO_DETAIL', id)
+    }
   },
   modules: {
   }

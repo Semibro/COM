@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="movieCard">
-        <div class="movieimgbox">
+        <div class="movieimgbox" @click="toDetail(movie.id)">
           <img :src="imgurl" class="movieimg">
         </div>
         <div class="text">
@@ -25,6 +25,11 @@ export default {
     imgurl() {
       return `https://image.tmdb.org/t/p/w300/${this.movie.poster_path}`
     },
+  },
+  methods: {
+    toDetail(id) {
+      this.$router.push({ name: 'detail', params: {id} })
+    }
   }
 }
 </script>
