@@ -1,6 +1,10 @@
 <template>
   <div>
-
+    {{ review }}
+    <form @submit.prevent="createComment">
+      <label for="content">내용 : </label>
+     <input type="text" v-model="inputdata">
+    </form>
   </div>
 </template>
 
@@ -13,6 +17,7 @@ export default {
   data() {
     return {
       review: null,
+      inputdata: null,
     }
   },
   methods: {
@@ -26,12 +31,32 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
-        //   this.review = res.data
+          this.review = res.data
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    createComment() {
+      const content = this.inputdata
+      if (!content) {
+        alert('내용을 입력해주세요')
+        return
+      }
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/${this.$route.params.movie_id}/${this.$route.params.review_id}/comment/`,
+        data: { content },
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(() => {
+            this.getReviewDetail()
+            this.inputdata = null
+        })
+        .catch(err => console.log(err))
     }
   },
   created() {

@@ -78,7 +78,7 @@ def review_detail(request, movie_pk, review_pk):
 
 @api_view(['GET', 'DELETE', 'POST'])
 def comment_create_or_list(request, movie_pk, review_pk):
-    movie = get_object_or_404(Movie, pk=movie_pk)
+    movie = get_object_or_404(Movie, id=movie_pk)
     review = movie.review_set.get(pk=review_pk)
     comment = review.comment_set.all()
     if request.method == 'GET':
@@ -91,5 +91,5 @@ def comment_create_or_list(request, movie_pk, review_pk):
     elif request.method == 'POST':
         serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user, movie=movie)
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_200_OK)
