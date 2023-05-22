@@ -16,7 +16,7 @@ headers = {
 }
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def movie_list(request):
     for page in range(1, 6):
         url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}"
