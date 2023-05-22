@@ -10,6 +10,7 @@
     <br>
     <div v-for="(review, index) in reviews" :key="index">
       {{ review.user }} : {{ review.content }}
+      <button @click="toReviewDetail(review.id)">DETAIL</button>
     </div>
   </div>
 </template>
@@ -31,9 +32,6 @@ export default {
     detail_movie() {
       return this.$store.state.detail_movie
     },
-    user_info() {
-      return this.$store.state.user_info
-    }
   },
   methods: {
     createReview() {
@@ -72,12 +70,18 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    toReviewDetail(id) {
+      // console.log(this.$route.params.id)
+      const movie = this.$route.params.id
+      // console.log(id)
+      const params_id = {movie_id: movie, review_id: id, }
+      this.$router.push({ name: 'review_detail', params: params_id })
     }
   },
   created() {
     this.$store.dispatch('toDetail', this.$route.params.id)
     this.getReviewDetail()
-    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
