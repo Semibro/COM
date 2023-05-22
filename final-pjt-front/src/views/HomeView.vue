@@ -3,8 +3,13 @@
     <p class="hero">
       <img src="@/assets/background_img/hero.png">
     </p>
-    <div>
+    <span class="recommend_title">
+      <h1>%%% 님의 취향저격 베스트 콘텐츠</h1>
+    </span>
+    <span class="recommend_title" style="margin-bottom: 20px">
       당신이 좋아하는 "{{ randomMovieTitle }}" 과 비슷한 영화를 준비했어요!
+    </span>
+    <div class="recommend_content">
       <RecommendMovieCard
         v-for="(movie, index) in recommendMoviesList" :key="index"
         :movie="movie"
@@ -64,5 +69,16 @@ export default {
   50% { transform: translate(0px, 0px) rotate(0deg); }
   
   100% { transform: translate(0px, 10px) rotate(0deg); }
+}
+
+.recommend_title {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10% 0 0;
+}
+
+.recommend_content {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

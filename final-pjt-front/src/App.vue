@@ -3,10 +3,10 @@
     <nav>
       <img src="@/assets/logo.png" class="logo">
       <div class="menu">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/movies">Movies</router-link> |
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/signup">Signup</router-link> |
+        <router-link to="/">Home</router-link>
+        <router-link to="/movies">Movies</router-link>
+        <router-link to="/login">Login</router-link>
+        <router-link to="/signup">Signup</router-link>
         <router-link to="/profile">Profile</router-link>
       </div>
     </nav>
@@ -32,7 +32,7 @@ export default {
   color: white;
   background-image: url('@/assets/background_img/home_bg.png');
   height: 100%;
-  width: 100vw;
+  width: 100%;
   position: relative;
 }
 
@@ -59,7 +59,7 @@ nav a {
   color: white;
   opacity: 50%;
   text-underline-offset: 7px;
-  padding: 0 30px;
+  padding: 0 25px;
 }
 
 nav a:hover {
