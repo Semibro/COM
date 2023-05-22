@@ -5,6 +5,9 @@
       <label for="content">내용 : </label>
      <input type="text" v-model="inputdata">
     </form>
+    <div v-for="(comment, index) in comments" :key="index">
+      {{ comment.user }} : {{ comment.content }}
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ export default {
     return {
       review: null,
       inputdata: null,
+      comments: null,
     }
   },
   methods: {
@@ -53,14 +57,31 @@ export default {
         }
       })
         .then(() => {
-            this.getReviewDetail()
+            this.getCommentList()
             this.inputdata = null
         })
         .catch(err => console.log(err))
+    },
+    getCommentList() {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${this.$route.params.movie_id}/${this.$route.params.review_id}/comment/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(res => {
+          this.comments = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   created() {
     this.getReviewDetail()
+    this.getCommentList()
   }
 }
 </script>

@@ -91,5 +91,5 @@ def comment_create_or_list(request, movie_pk, review_pk):
     elif request.method == 'POST':
         serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            serializer.save(user=request.user, movie=movie, review=review)
             return Response(serializer.data, status=status.HTTP_200_OK)
