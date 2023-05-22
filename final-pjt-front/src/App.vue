@@ -1,14 +1,39 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/movies">Movies</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/signup">Signup</router-link>
+      <span v-if="isLogin">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/movies">Movies</router-link> |
+        <router-link to="/#" @click.native="logout">Logout</router-link> |
+      </span>
+
+      <span v-else>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/movies">Movies</router-link> |
+        <router-link to="/login">Login</router-link> |
+        <router-link to="/signup">Signup</router-link>
+      </span>
     </nav>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.state.token = null
+      this.$router.push({ name: 'login' })
+    }
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');
