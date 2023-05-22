@@ -80,7 +80,7 @@ def review_detail(request, movie_pk, review_pk):
 def comment_list(request, movie_pk, review_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     review = movie.review_set.get(pk=review_pk)
-    comment = review.comment_set.get()
+    comment = review.comment_set.all()
     if request.method == 'GET':
         serializer = CommentListSerializer(comment, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
