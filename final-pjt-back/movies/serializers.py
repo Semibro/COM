@@ -37,6 +37,8 @@ class ReviewDetailSerializer(serializers.ModelSerializer):
             model = Movie
             fields = ('title', 'poster_path',)
 
+    user = serializers.CharField(source='user.username', read_only=True)
+
     class Meta:
         model = Review
         fields = '__all__'
