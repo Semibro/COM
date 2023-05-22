@@ -2,15 +2,47 @@
   <div>
     <h1>영화 디테일 페이지</h1>
     {{ detail_movie }}
+    <br>
+    <input type="text" v-model="inputdata" @keyup.enter="createReview">
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
+
 export default {
   name: 'MovieDetailView',
+  data() {
+    return {
+      inputdata: null,
+    }
+  },
   computed: {
     detail_movie() {
       return this.$store.state.detail_movie
+    }
+  },
+  methods: {
+    createReview() {
+      const content = this.inputdata
+      if (!content) {
+        alert('내용을 입력해주세요')
+        return
+      }
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+        data: {content},
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
     }
   },
   created() {
