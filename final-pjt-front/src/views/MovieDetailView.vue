@@ -9,7 +9,7 @@
     </form>
     <br>
     <div v-for="(review, index) in reviews" :key="index">
-      {{ user_info.username }} : {{ review.content }}
+      {{ review.user }} : {{ review.content }}
     </div>
   </div>
 </template>
@@ -67,7 +67,6 @@ export default {
         },
       })
         .then(res => {
-          // console.log(res.data)
           this.reviews = res.data
         })
         .catch(err => {
