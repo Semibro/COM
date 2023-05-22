@@ -11,6 +11,7 @@ class PopularMovieListSerializer(serializers.ModelSerializer):
 
 # review, comment
 class ReviewListSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Review
         fields = '__all__'
