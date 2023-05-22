@@ -7,6 +7,10 @@
       <label for="content">내용 : </label>
      <input type="text" v-model="inputdata">
     </form>
+    <br>
+    <div v-for="(review, index) in reviews" :key="index">
+      내용 : {{review.content}}
+    </div>
   </div>
 </template>
 
@@ -19,12 +23,13 @@ export default {
   data() {
     return {
       inputdata: null,
+      reviews: []
     }
   },
   computed: {
     detail_movie() {
       return this.$store.state.detail_movie
-    }
+    },
   },
   methods: {
     createReview() {
@@ -46,10 +51,27 @@ export default {
             console.log(res)
         })
         .catch(err => console.log(err))
+    },
+    getReviewDetail() {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(res => {
+          this.reviews = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   created() {
     this.$store.dispatch('toDetail', this.$route.params.id)
+    this.getReviewDetail()
   }
 }
 </script>
