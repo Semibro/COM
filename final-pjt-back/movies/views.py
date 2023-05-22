@@ -21,7 +21,6 @@ def movie_list(request):
     for page in range(1, 6):
         url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}"
         response = requests.get(url, headers=headers).json()
-        print(response)
         saved_movies = Movie.objects.values_list('id', flat=True)
         for result in response['results']:
             if result['id'] not in saved_movies:

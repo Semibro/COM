@@ -13,6 +13,8 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
+    token: null,
+    popularMovies: null,
   },
   getters: {
     isLogin(state) {
@@ -27,6 +29,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({name: 'home'})
+    },
+    GET_POPULAR_MOVIES(state, movies) {
+      state.popularMovies = movies
     },
   },
   actions: {
@@ -59,6 +64,16 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('SAVE_TOKEN', res.data.key)
+        })
+        .catch(err => console.log(err))
+    },
+    getPopularMovies(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/`,
+      })
+        .then(res => {
+          context.commit('GET_POPULAR_MOVIES', res.data)
         })
         .catch(err => console.log(err))
     },
