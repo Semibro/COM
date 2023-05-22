@@ -4,18 +4,20 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .serializers import PopularMovieListSerializer
-from .models import Movie
+from .serializers import PopularMovieListSerializer, ReviewListSerializer, ReviewDetailSerializer, ReviewSerializer, CommentListSerializer
+from .models import Movie, Review, Comment
 
 import requests
 
 # Create your views here.
+# api headers
 headers = {
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWI1MTViYzI0Y2I5N2VlMDdkNjU4ZjVmZDBhYTFhNyIsInN1YiI6IjYzZDMxOGY0NjZhZTRkMDA5NmI3M2EwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ryaRC-WBbFQHXdaZjys7Gjrz8AxKGeaj1k6KioWjYWc"
 }
 
 
+# movie / detail / credit / recommend
 @api_view(['GET', 'POST'])
 def movie_list(request):
     for page in range(1, 6):
@@ -39,3 +41,46 @@ def movie_list(request):
     movies = get_list_or_404(Movie)
     serializer = PopularMovieListSerializer(movies, many=True)
     return Response(serializer.data)
+
+
+# review / comment
+@api_view(['POST', 'GET'])
+def review_create_or_list(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    if request.method == 'POST':
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'GET':
+        serializer = ReviewListSerializer(movie, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def review_detail(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if request.method == 'GET':
+        serializer = ReviewDetailSerializer(review)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'PUT':
+        serializer = ReviewDetailSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'DELETE':
+        review.delete()
+        data = f'{review_pk}번째 리뷰가 삭제됐습니다.'
+        return Response(data, status=status.HTTP_204_NO_CONTENT)
+    
+
+@api_view(['GET', 'DELETE'])
+def comment_list(request, review_pk):
+    comment = Comment.objects.get(pk=review_pk)
+    if request.method == 'GET':
+        serializer = CommentListSerializer(comment, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'DELETE':
+        comment.delete()
+        data = '댓글이 삭제됐습니다.'
+        return Response(data, status=status.HTTP_204_NO_CONTENT)
