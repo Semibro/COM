@@ -12,7 +12,7 @@ import requests
 # Create your views here.
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer cab515bc24cb97ee07d658f5fd0aa1a7"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWI1MTViYzI0Y2I5N2VlMDdkNjU4ZjVmZDBhYTFhNyIsInN1YiI6IjYzZDMxOGY0NjZhZTRkMDA5NmI3M2EwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ryaRC-WBbFQHXdaZjys7Gjrz8AxKGeaj1k6KioWjYWc"
 }
 
 
@@ -21,6 +21,7 @@ def movie_list(request):
     for page in range(1, 6):
         url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}"
         response = requests.get(url, headers=headers).json()
+        print(response)
         saved_movies = Movie.objects.values_list('id', flat=True)
         for result in response['results']:
             if result['id'] not in saved_movies:
