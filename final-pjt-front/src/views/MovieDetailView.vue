@@ -9,7 +9,7 @@
     </form>
     <br>
     <div v-for="(review, index) in reviews" :key="index">
-      내용 : {{review.content}}
+      {{ user_info.username }} : {{ review.content }}
     </div>
   </div>
 </template>
@@ -23,13 +23,17 @@ export default {
   data() {
     return {
       inputdata: null,
-      reviews: []
+      reviews: [],
+      written_user: null,
     }
   },
   computed: {
     detail_movie() {
       return this.$store.state.detail_movie
     },
+    user_info() {
+      return this.$store.state.user_info
+    }
   },
   methods: {
     createReview() {
@@ -47,8 +51,9 @@ export default {
           Authorization: `Bearer ${ token }`
         }
       })
-        .then(res => {
-            console.log(res)
+        .then(() => {
+            this.getReviewDetail()
+            this.inputdata = null
         })
         .catch(err => console.log(err))
     },
@@ -62,6 +67,7 @@ export default {
         },
       })
         .then(res => {
+          // console.log(res.data)
           this.reviews = res.data
         })
         .catch(err => {
@@ -72,6 +78,7 @@ export default {
   created() {
     this.$store.dispatch('toDetail', this.$route.params.id)
     this.getReviewDetail()
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>

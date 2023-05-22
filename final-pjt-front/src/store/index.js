@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
-// import router from '../router'
+import router from '../router'
 
 const API_URL = 'http://127.0.0.1:8000'
 
@@ -15,12 +15,14 @@ export default new Vuex.Store({
   state: {
     popularMovies: null,
     detail_movie: null,
+    user_info: null,
   },
   getters: {
   },
   mutations: {
     SIGN_UP(state, token) {
       state.token = token
+      router.push({name: 'login'})
       // router.push({name: 'likemoviechoose'})
     },
     GET_POPULAR_MOVIES(state, movies) {
@@ -34,8 +36,12 @@ export default new Vuex.Store({
         } else {
           count ++
         }
-      });
+      })
     },
+    GET_USER_INFO(state, info) {
+      state.user_info = info
+      console.log(state.user_info)
+    }
   },
   actions: {
     signUp(context, payload) {
@@ -71,6 +77,21 @@ export default new Vuex.Store({
     },
     toDetail(context, id) {
       context.commit('TO_DETAIL', id)
+    },
+    getUserInfo(context) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(res => {
+          // console.log(res.data)
+          context.commit('GET_USER_INFO', res.data)
+        })
+        .catch(err => console.log(err))
     }
   },
   modules: {
