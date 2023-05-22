@@ -76,8 +76,8 @@ def review_detail(request, movie_pk, review_pk):
         return Response(data, status=status.HTTP_204_NO_CONTENT)
     
 
-@api_view(['GET', 'DELETE'])
-def comment_list(request, movie_pk, review_pk):
+@api_view(['GET', 'DELETE', 'POST'])
+def comment_create_or_list(request, movie_pk, review_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     review = movie.review_set.get(pk=review_pk)
     comment = review.comment_set.all()
@@ -88,3 +88,8 @@ def comment_list(request, movie_pk, review_pk):
         comment.delete()
         data = '댓글이 삭제됐습니다.'
         return Response(data, status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'POST':
+        serializer = CommentCreateSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, movie=movie)
+            return Response(serializer.data, status=status.HTTP_200_OK)
