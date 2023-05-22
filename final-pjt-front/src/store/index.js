@@ -26,10 +26,10 @@ export default new Vuex.Store({
     GET_POPULAR_MOVIES(state, movies) {
       state.popularMovies = movies
     },
-    TO_DETAIL(state, listId) {
+    TO_DETAIL(state, id) {
       let count = 0
       state.popularMovies.forEach(movie => {
-        if (movie.listId === listId) {
+        if (movie.id === id) {
           state.detail_movie = state.popularMovies[count]
         } else {
           count ++
@@ -69,8 +69,8 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
-    toDetail(context, listId) {
-      context.commit('TO_DETAIL', listId)
+    toDetail(context, id) {
+      context.commit('TO_DETAIL', id)
     }
   },
   modules: {
