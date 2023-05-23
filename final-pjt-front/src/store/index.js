@@ -51,7 +51,15 @@ export default new Vuex.Store({
         },
       })
         .then(res => {
-          state.liked_movies.push(res.data)
+          let flag = 1
+          state.liked_movies.forEach(movie => {
+            if (movie.id === res.data.id) {
+              flag = 2
+            }
+          });
+          if (flag === 1) {
+            state.liked_movies.push(res.data)
+          }
           console.log(state.liked_movies)
         })
         .catch(err => {
