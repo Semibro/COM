@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>영화 디테일 페이지</h1>
-    {{ detail_movie }}
+    <MovieDetailPage :detail_movie="detail_movie"/>
     <br>
     <form @submit.prevent="createReview">
       <label for="content">내용 : </label>
@@ -16,11 +16,16 @@
 </template>
 
 <script>
+import MovieDetailPage from '@/components/MovieDetailPage'
+
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'MovieDetailView',
+  components: {
+    MovieDetailPage,
+  },
   data() {
     return {
       inputdata: null,

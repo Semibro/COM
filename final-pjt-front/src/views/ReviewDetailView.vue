@@ -1,6 +1,7 @@
 <template>
   <div>
     {{ review }}
+    <br>
     <button @click="deleteReview(review.id)">DELETE</button>
     <form @submit.prevent="createComment">
       <label for="content">내용 : </label>
@@ -112,7 +113,7 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
   },
   created() {
     this.getReviewDetail()

@@ -15,7 +15,7 @@ class Movie(models.Model):
     release_date = models.DateField(null=True, default=datetime.date.today)
     vote_average = models.FloatField(null=True)
     vote_count = models.IntegerField(null=True)
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, releated_name='like_movies')
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
 
 
 # review / comment
