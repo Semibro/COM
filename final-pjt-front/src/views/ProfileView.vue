@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1> {{ username }} 님의 프로필 </h1>
+    <h1> {{ user_info.username }} 님의 프로필 </h1>
+    {{ like_movie_list }}
   </div>
 </template>
 
@@ -10,9 +11,17 @@ const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'ProfileView',
+  data() {
+    return {
+      like_movie_list: [],
+    }
+  },
   computed: {
-    username() {
-      return this.$store.state.user_info.username
+    user_info() {
+      return this.$store.state.user_info
+    },
+    liked_movies() {
+      return this.$store.state.liked_movies
     }
   },
   methods: {
@@ -32,9 +41,16 @@ export default {
           console.log(err)
         })
     },
+    findUserLike() {
+      this.liked_movies.forEach(movie => {
+       if (movie.like_users[0] === this.user_info.id) {
+        this.like_movie_list.push(movie)
+       }
+      })
+    }
   },
   created() {
-
+    this.findUserLike()
   }
 }
 </script>
