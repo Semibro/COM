@@ -22,9 +22,9 @@ def follow(request, username):
     user = request.user
     person = get_object_or_404(User, username=username)
     if person != user:
-        if person.followers.filter(pk=user.pk).exists():
-            person.followers.remove(user)
+        if person.followings.filter(pk=user.pk).exists():
+            person.followings.remove(user)
         else:
-            person.followers.add(user)
+            person.followings.add(user)
         serializer = UserSerializer(person)
         return Response(serializer.data, status=status.HTTP_200_OK) 

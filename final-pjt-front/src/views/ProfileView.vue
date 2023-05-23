@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1> {{ user_info.username }} 님의 프로필 </h1>
+    <h1> {{ masterOfProfile }} 님의 프로필</h1>
+    <button @click="followUser(masterOfProfile)">팔로우/언팔로우</button>
+    <p>팔로워: {{ real_user_info.followings.length }} 명 </p>
+    <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
       {{ movie }}
       <br><br>
@@ -17,6 +20,8 @@ export default {
   data() {
     return {
       like_movie_list: [],
+      real_user_info: null,
+      masterOfProfile: this.$route.params.username
     }
   },
   computed: {
@@ -38,13 +43,30 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
+          // console.log(res)
+          this.real_user_info = res.data
           this.like_movie_list = res.data.like_movies
         })
         .catch(err => {
           console.log(err)
         })
     },
+    followUser(username) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'post',
+        url: `${API_URL}/profile/${username}/follow/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(() => {
+          this.getProfile()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   },
   created() {
     this.getProfile()
