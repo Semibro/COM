@@ -1,21 +1,22 @@
 <template>
   <div class="home">
     <h1>지금 핫한 영화!</h1>
-    <div v-for="(movie, index) in recommendMovie" :key="index"
-      @click="toDetail(movie.id)"
-    >
-      {{ movie }}
-      <br><br>
-    </div>
+    <RecommendMovies
+      v-for="(movie, index) in recommendMovie" :key="index"
+      :movie="movie"
+    />
   </div>
 </template>
 
 <script>
+import RecommendMovies from '../components/RecommendMovies.vue'
+
 import _ from 'lodash'
 
 export default {
   name: 'HomeView',
   components: {
+    RecommendMovies,
   },
   data() {
     return {
@@ -29,9 +30,7 @@ export default {
   },
   methods: {
     getRecommendMovie() {
-      this.recommendMovie.push(_.sample(this.popularMovies, 1))
-      this.recommendMovie.push(_.sample(this.popularMovies, 1))
-      this.recommendMovie.push(_.sample(this.popularMovies, 1))
+      this.recommendMovie = _.sampleSize(this.popularMovies, 3)
     },
     toDetail(id) {
       this.$router.push({ name: 'detail', params: {id} })
