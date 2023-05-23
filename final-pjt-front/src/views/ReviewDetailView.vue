@@ -1,8 +1,8 @@
 <template>
   <div>
-    {{ review }}
-    <br>
-    <button @click="deleteReview(review.id)">DELETE</button>
+    <div v-if="this.$route.params.user_id === this.user_info.pk">
+      <button @click="deleteReview(review.id)">DELETE</button>
+    </div>
     <form @submit.prevent="createComment">
       <label for="content">내용 : </label>
      <input type="text" v-model="inputdata">
@@ -25,6 +25,11 @@ export default {
       review: null,
       inputdata: null,
       comments: null,
+    }
+  },
+  computed: {
+    user_info() {
+      return this.$store.state.user_info
     }
   },
   methods: {
@@ -82,7 +87,7 @@ export default {
         })
     },
     deleteComment(id) {
-     const token = localStorage.getItem('jwt')
+      const token = localStorage.getItem('jwt')
       axios({
         method: 'delete',
         url: `${API_URL}/movies/${this.$route.params.movie_id}/${this.$route.params.review_id}/comment/${id}/`,
@@ -118,6 +123,7 @@ export default {
   created() {
     this.getReviewDetail()
     this.getCommentList()
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>

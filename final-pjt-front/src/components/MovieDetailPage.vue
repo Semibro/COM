@@ -55,7 +55,7 @@ export default {
         .then(res => {
           // console.log(res.data.results[0].key)
           this.youtubeId = res.data.results[0].key
-          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&playlist=${this.youtubeId}`
+          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&playlist=${this.youtubeId}`
           this.youtubesrc = youtubesrc
         })
         .catch(err => console.log(err))
