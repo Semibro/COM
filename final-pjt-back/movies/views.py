@@ -110,5 +110,5 @@ def likes(request, movie_pk):
             movie.like_users.remove(request.user)
         else:
             movie.like_users.add(request.user)
-        serializer = MovieLikeSerializer(movie, many=True)
+        serializer = PopularMovieListSerializer(movie, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

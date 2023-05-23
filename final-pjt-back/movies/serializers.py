@@ -1,9 +1,18 @@
 from rest_framework import serializers
 from .models import Movie, Review, Comment
+from accounts.models import User
 
 
 # movie
 class PopularMovieListSerializer(serializers.ModelSerializer):
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = '__all__'
+
+    user = UserSerializer(read_only=True)
+    like_movies = UserSerializer(read_only=True, many=True)
+
     class Meta:
         model = Movie
         fields = '__all__'
@@ -64,10 +73,3 @@ class CommentCreateSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ('content',)
         read_only_fields = ('user', 'movie', 'review',)
-
-
-class MovieLikeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movie
-        fields = '__all__'
-        read_only_fields = ('user',)
