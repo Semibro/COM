@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="RecommendMovies">
+      <h2> {{ user_info.username }} 님의 취향저격 콘텐츠 </h2>
       <div class="wrapper">
         <div class="text">
-          <span :data-text="movie.title"></span>
+          <p style="font-size: 30px; margin-right: 50px"> {{ movie.title }} </p>
+          <!-- <span :data-text="movie.title" style="font-size: 30px;"></span> -->
         </div>
         <input type="checkbox">
         <div class="video">
-          <iframe width="1000px" height="700px" :src="youtubesrc" loop muted autoplay></iframe>
+          <iframe width="1000px" height="500px" :src="youtubesrc" loop muted autoplay></iframe>
         </div>
       </div>
-
-      <!-- <iframe width="1000px" height="700px" :src="youtubesrc"></iframe> -->
     </div>
   </div>
 </template>
@@ -35,6 +35,9 @@ export default {
     imgurl() {
       return `https://image.tmdb.org/t/p/w300/${this.movie.poster_path}`
     },
+    user_info() {
+      return this.$store.state.user_info
+    }
   },
   methods: {
     toDetail(id) {
@@ -48,7 +51,7 @@ export default {
         .then(res => {
           // console.log(res.data.results[0].key)
           this.youtubeId = res.data.results[0].key
-          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&playlist=${this.youtubeId}`
+          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&controls=0&playlist=${this.youtubeId}`
           this.youtubesrc = youtubesrc
         })
         .catch(err => console.log(err))
@@ -68,12 +71,17 @@ export default {
   align-items: center;
 }
 
+.RecommendMovies h2 {
+  margin: 20px 0 0 70%;
+}
+
 .wrapper {
+  margin: 0 0 0 20%;
   --color: white;
-  --color-invert: #ffffff;
-  --clip-path: circle(15px at right);
-  --clip-path-hover: circle(400px at right);
-  --clip-path-clicked: circle(100vw at right);
+  --color-invert: rgb(64, 64, 64);
+  --clip-path: circle(25px at right);
+  --clip-path-hover: circle(300px at right);
+  --clip-path-clicked: circle(800px at right);
   --duration: .4s;
   --timing-function: ease;
   position: relative;
@@ -115,7 +123,7 @@ export default {
   opacity: var(--opacity, 1);
   transition: opacity 0.3s var(--timing-function) 0.2s;
 }
-.wrapper .text::before, .wrapper .text::after {
+/* .wrapper .text::before, .wrapper .text::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -153,10 +161,10 @@ export default {
   transition: clip-path var(--duration) var(--timing-function), -webkit-clip-path var(--duration) var(--timing-function);
   position: absolute;
   left: 0;
-}
+} */
 .wrapper input {
-  width: 220px;
-  height: 40px;
+  width: 400px;
+  height: 100px;
   margin: auto;
   position: absolute;
   left: 0;

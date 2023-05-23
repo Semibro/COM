@@ -3,14 +3,14 @@
     <p class="hero">
       <img src="@/assets/background_img/hero.png">
     </p>
-    <div class="hometext">
-      <h1>{{ user_info.username }} 님의 취향저격 베스트 콘텐츠</h1>
-      <p> {{ user_info.username }} 님이 좋아할만한 영화를 준비했어요 </p>
-    </div>
     <RecommendMovies
       v-for="(movie, index) in recommendMovie" :key="index"
       :movie="movie"
     />
+    <!-- <div class="hometext">
+      <h1>{{ user_info.username }} 님의 취향저격 베스트 콘텐츠</h1>
+      <p> {{ user_info.username }} 님이 좋아할만한 영화를 준비했어요 </p>
+    </div> -->
   </div>
 </template>
 
