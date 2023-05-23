@@ -26,6 +26,11 @@ export default {
       return `https://image.tmdb.org/t/p/w300/${this.movie.poster_path}`
     },
   },
+  methods: {
+    toDetail(id) {
+      this.$router.push({ name: 'detail', params: {id} })
+    },
+  }
 }
 </script>
 

@@ -32,9 +32,6 @@ export default {
     getRecommendMovie() {
       this.recommendMovie = _.sampleSize(this.popularMovies, 3)
     },
-    toDetail(id) {
-      this.$router.push({ name: 'detail', params: {id} })
-    }
   },
   created() {
     this.getRecommendMovie()
