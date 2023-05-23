@@ -63,10 +63,11 @@ class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('content',)
-        read_only_fields = ('user', 'moviea', 'review',)
+        read_only_fields = ('user', 'movie', 'review',)
 
 
 class MovieLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = '__all__'
+        read_only_fields = ('user',)
