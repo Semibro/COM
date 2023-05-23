@@ -100,3 +100,15 @@ def comment_delete(request, movie_pk, review_pk, comment_pk):
         comment.delete()
         data = f'{comment_pk}번째 댓글이 삭제됐습니다.'
         return Response(data, status=status.HTTP_204_NO_CONTENT)
+    
+
+@api_view(['POST'])
+def likes(request, movie_pk):
+    if request.user.is_authenticated:
+        movie = get_object_or_404(Movie, id=movie_pk)
+        if movie.like_users.filter(pk=request.user.pk).exists():
+            movie.like_users.remove(request.user)
+        else:
+            movie.like_users.add(request.user)
+        serializer = MovieLikeSerializer(movie, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
