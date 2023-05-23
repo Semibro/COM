@@ -125,7 +125,7 @@ body {
 }
 
 nav {
-  padding: 30px;
+  padding: 30px 5% 30px 30px;
   display: flex;
   z-index: 2;
   letter-spacing: 1.2px;
@@ -136,7 +136,7 @@ nav a {
   color: white;
   opacity: 50%;
   text-underline-offset: 7px;
-  padding: 0 30px;
+  padding: 0 0 0 60px;
 }
 
 nav a:hover {

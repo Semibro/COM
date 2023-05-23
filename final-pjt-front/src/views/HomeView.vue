@@ -39,7 +39,8 @@ export default {
   },
   methods: {
     getRecommendMovie() {
-      this.recommendMovie = _.sampleSize(this.popularMovies, 3)
+      this.recommendMovie = _.sampleSize(this.popularMovies, 1)
+      // this.recommendMovie = _.sample(this.popularMovies)
     },
   },
   created() {
@@ -77,5 +78,9 @@ export default {
   flex-direction: column;
   align-items: flex-end;
   margin: 0 5% 0 0;
+}
+
+.hometext h1 {
+  margin: 50px 0 0 0;
 }
 </style>
