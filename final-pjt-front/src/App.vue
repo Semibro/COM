@@ -108,8 +108,13 @@ export default {
   position: relative;
 }
 
+*::-webkit-scrollbar {
+    display: none;
+}
+
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 .navwrap {
