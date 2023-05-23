@@ -68,12 +68,8 @@ export default {
     }
   },
   created() {
-    // this.findUserLike()
-    this.$store.dispatch('getPopularMovies')
-  },
-  // updated() {
-  //   this.$store.dispatch('getPopularMovies')
-  // }
+    this.findUserLike()
+  }
 }
 </script>
 
