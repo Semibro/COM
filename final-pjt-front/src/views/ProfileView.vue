@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1> {{ user_info.username }} 님의 프로필 </h1>
-    {{ like_movie_list }}
+    <div v-for="(movie, index) in like_movie_list" :key="index">
+      {{ movie }}
+      <br><br>
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,9 @@ export default {
     },
     liked_movies() {
       return this.$store.state.liked_movies
+    },
+    popularMovies() {
+      return this.$store.state.popularMovies
     }
   },
   methods: {
@@ -42,16 +48,32 @@ export default {
         })
     },
     findUserLike() {
-      this.liked_movies.forEach(movie => {
-       if (movie.like_users[0] === this.user_info.id) {
-        this.like_movie_list.push(movie)
-       }
+      const lst = []
+      // like_movie_list = this.popularMovies.filter(movie => {
+      //   // console.log(Object.values(movie.like_users))
+      //   Object.values(movie.like_users).includes(this.user_info.pk)
+      // })
+      // console.log(like_movie_list)
+
+
+      this.popularMovies.forEach(movie => {
+        movie.like_users.forEach(userId => {
+          if (userId === this.user_info.pk) {
+            lst.push(movie)
+            // this.like_movie_list.push(movie)
+          }
+        })
       })
+      this.like_movie_list = lst
     }
   },
   created() {
-    this.findUserLike()
-  }
+    // this.findUserLike()
+    this.$store.dispatch('getPopularMovies')
+  },
+  // updated() {
+  //   this.$store.dispatch('getPopularMovies')
+  // }
 }
 </script>
 
