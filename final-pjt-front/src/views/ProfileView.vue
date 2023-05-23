@@ -50,7 +50,7 @@ export default {
     }
   },
   created() {
-    this.findUserLike()
+    this.getProfile()
   }
 }
 </script>
