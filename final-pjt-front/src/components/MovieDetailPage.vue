@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-const API_URL = 'http://127.0.0.1:8000'
+// import axios from 'axios'
+// const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'MovieDetailPage',
@@ -37,21 +37,8 @@ export default {
   },
   methods: {
     likeMovie(id) {
-      const token = localStorage.getItem('jwt')
-      axios({
-        method: 'post',
-        url: `${API_URL}/movies/${id}/likes/`,
-        headers: {
-          Authorization: `Bearer ${ token }`
-        },
-      })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+      this.$store.dispatch('likeMovie', id)
+    },
   }
 }
 </script>

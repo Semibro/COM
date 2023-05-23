@@ -104,11 +104,11 @@ def comment_delete(request, movie_pk, review_pk, comment_pk):
 
 @api_view(['POST'])
 def likes(request, movie_pk):
-    if request.user.is_authenticated:
-        movie = get_object_or_404(Movie, id=movie_pk)
-        if movie.like_users.filter(pk=request.user.pk).exists():
-            movie.like_users.remove(request.user)
-        else:
-            movie.like_users.add(request.user)
-        serializer = PopularMovieListSerializer(movie, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    user = request.user
+    movie = get_object_or_404(Movie, id=movie_pk)
+    if movie.like_users.filter(pk=user.pk).exists():
+        movie.like_users.remove(user)
+    else:
+        movie.like_users.add(user)
+    serializer = PopularMovieListSerializer(movie)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -16,6 +16,7 @@ export default new Vuex.Store({
     popularMovies: null,
     detail_movie: null,
     user_info: null,
+    liked_movies: [],
   },
   getters: {
   },
@@ -39,6 +40,23 @@ export default new Vuex.Store({
     },
     GET_USER_INFO(state, info) {
       state.user_info = info
+    },
+    LIKE_MOVIE(state, id) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/${id}/likes/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(res => {
+          state.liked_movies.push(res.data)
+          console.log(state.liked_movies)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   actions: {
@@ -89,6 +107,9 @@ export default new Vuex.Store({
           context.commit('GET_USER_INFO', res.data)
         })
         .catch(err => console.log(err))
+    },
+    likeMovie(context, id) {
+      context.commit('LIKE_MOVIE', id)
     }
   },
   modules: {
