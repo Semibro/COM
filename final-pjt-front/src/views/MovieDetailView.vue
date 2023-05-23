@@ -10,7 +10,7 @@
     <br>
     <div v-for="(review, index) in reviews" :key="index">
       {{ review.user }} : {{ review.content }}
-      <button @click="toReviewDetail(review.id)">DETAIL</button>
+      <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
     </div>
   </div>
 </template>
@@ -76,11 +76,11 @@ export default {
           console.log(err)
         })
     },
-    toReviewDetail(id) {
+    toReviewDetail(id, user_id) {
       // console.log(this.$route.params.id)
       const movie = this.$route.params.id
       // console.log(id)
-      const params_id = {movie_id: movie, review_id: id, }
+      const params_id = {movie_id: movie, review_id: id, user_id: user_id,}
       this.$router.push({ name: 'review_detail', params: params_id })
     }
   },
