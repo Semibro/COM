@@ -106,9 +106,11 @@ def comment_delete(request, movie_pk, review_pk, comment_pk):
 def likes(request, movie_pk):
     user = request.user
     movie = get_object_or_404(Movie, id=movie_pk)
-    if movie.like_users.filter(pk=user.pk).exists():
-        movie.like_users.remove(user)
-    else:
-        movie.like_users.add(user)
+    # test
+    movie.like_users.add(user)
+    # if movie.like_users.filter(pk=user.pk).exists():
+    #     movie.like_users.remove(user)
+    # else:
+    #     movie.like_users.add(user)
     serializer = PopularMovieListSerializer(movie)
     return Response(serializer.data, status=status.HTTP_200_OK)
