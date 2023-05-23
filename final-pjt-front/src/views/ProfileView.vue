@@ -23,9 +23,6 @@ export default {
     user_info() {
       return this.$store.state.user_info
     },
-    liked_movies() {
-      return this.$store.state.liked_movies
-    },
     popularMovies() {
       return this.$store.state.popularMovies
     }
@@ -42,33 +39,15 @@ export default {
       })
         .then(res => {
           console.log(res)
+          this.like_movie_list = res.data.like_movies
         })
         .catch(err => {
           console.log(err)
         })
     },
-    findUserLike() {
-      const lst = []
-      // like_movie_list = this.popularMovies.filter(movie => {
-      //   // console.log(Object.values(movie.like_users))
-      //   Object.values(movie.like_users).includes(this.user_info.pk)
-      // })
-      // console.log(like_movie_list)
-
-
-      this.popularMovies.forEach(movie => {
-        movie.like_users.forEach(userId => {
-          if (userId === this.user_info.pk) {
-            lst.push(movie)
-            // this.like_movie_list.push(movie)
-          }
-        })
-      })
-      this.like_movie_list = lst
-    }
   },
   created() {
-    this.findUserLike()
+    this.getProfile()
   }
 }
 </script>
