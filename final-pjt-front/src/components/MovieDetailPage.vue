@@ -50,12 +50,12 @@ export default {
     getYoutube(id) {
       axios({
         method: 'get',
-        url: `https://api.themoviedb.org/3/movie/${id}/videos?language=ko-KR&api_key=${API_KEY}`
+        url: `https://api.themoviedb.org/3/movie/${id}/videos?&api_key=${API_KEY}`
       })
         .then(res => {
           // console.log(res.data.results[0].key)
           this.youtubeId = res.data.results[0].key
-          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1`
+          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&playlist=${this.youtubeId}`
           this.youtubesrc = youtubesrc
         })
         .catch(err => console.log(err))
