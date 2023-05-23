@@ -47,6 +47,46 @@ export default {
     this.$store.dispatch('getUserInfo')
   },
 }
+
+        console.log(
+        '%c\n' +
+        '                                                                        ,,\n' +
+        '                                                                       /  ,\n' +
+        '                                                                      /   /\n' +
+        '                                                                     /   /\n' +
+        '                                                                    /   /\n' +
+        '     _______________________________                               /   /\n' +
+        '    ⎢                               ⎥                              /   /\n' +
+        '    ⎢  우리 집에서 영화 보고 갈래?   ⎥                            /   /\n' +
+        '    ⎢____    _______________________⎥                            /   /\n' +
+        '          \\/    ,      ,,                                      /   /\n' +
+        '               /'+'%c@'+'%c\\____/'+'%c@'+'%c \\                                ____/   /\n' +
+        '              /           \\                         _____/        /__\n' +
+        '        /" \\ / •    •      \\                     __/             /  '+'%c@@'+'%c"\\\n' +
+        '        \\    '+'%c@@'+'%c  ㅅ  '+'%c@@'+'%c     /___             ___/                /    _/\n' +
+        '       /" \\   \\                 \\__________/                    |__/ "\\\n' +
+        '       \\   \\                                                   /      /\n' +
+        '        \\    \\  __                                                  _/\n' +
+        '         \\                                                       __/\n' +
+        '           \\_                                             ______/\n' +
+        '              \\ ___                                    __/\n' +
+        '                    \\__                             __/\n' +
+        '                        \\_____                _____/\n' +
+        '                              \\______________/\n' +
+        '\n',
+
+        'font-weight: bold;',
+        'font-weight: bold; color: #ff7777',
+        'font-weight: bold;',
+        'font-weight: bold; color: #ff7777',
+        'font-weight: bold;',
+        'font-weight: bold; color: #ff7777',
+        'font-weight: bold;',
+        'font-weight: bold; color: #ff7777',
+        'font-weight: bold;',
+        'font-weight: bold; color: #ff7777',
+        'font-weight: bold;'
+    );
 </script>
 
 <style>
