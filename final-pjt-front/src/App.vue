@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <nav>
-      <span v-if="isLogin">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/movies">Movies</router-link> |
-        <router-link :to="{ name: 'profile', params: { username: username } }">Profile</router-link> |
-        <router-link to="/#" @click.native="logout">Logout</router-link> |
-      </span>
+    <div class="navwrap">
+      <img src="@/assets/logo.png" class="logo">
+      <nav>
+        <span v-if="isLogin" class="menu">
+          <router-link to="/">Home</router-link>
+          <router-link to="/movies">Movies</router-link>
+          <router-link :to="{ name: 'profile', params: { username: username } }">Profile</router-link>
+          <router-link to="/#" @click.native="logout">Logout</router-link>
+        </span>
 
-      <span v-else>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/movies">Movies</router-link> |
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/signup">Signup</router-link>
-      </span>
-    </nav>
+        <span v-else>
+          <router-link to="/">Home</router-link>
+          <router-link to="/movies">Movies</router-link>
+          <router-link to="/login">Login</router-link>
+          <router-link to="/signup">Signup</router-link>
+        </span>
+      </nav>
+    </div>
     <router-view @login="isLogin=true" />
   </div>
 </template>
@@ -98,19 +101,53 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  background-image: url('@/assets/background_img/home_bg.png');
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+}
+
+.navwrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: 7%;
+  width: 13vw;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 nav {
   padding: 30px;
+  display: flex;
+  z-index: 2;
+  letter-spacing: 1.2px;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
+  opacity: 50%;
+  text-underline-offset: 7px;
+  padding: 0 30px;
+}
+
+nav a:hover {
+  opacity: 100%;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  opacity: 100%;
+}
+
+.menu {
+  color: white;
 }
 </style>
