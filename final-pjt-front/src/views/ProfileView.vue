@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1> {{ masterOfProfile }} 님의 프로필</h1>
-    <button @click="followUser(masterOfProfile)">팔로우/언팔로우</button>
+    <div v-if="masterOfProfile != user_info.username">
+      <button @click="followUser(masterOfProfile)">팔로우/언팔로우</button>
+    </div>
     <p>팔로워: {{ real_user_info.followings.length }} 명 </p>
     <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
@@ -70,6 +72,7 @@ export default {
   },
   created() {
     this.getProfile()
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
