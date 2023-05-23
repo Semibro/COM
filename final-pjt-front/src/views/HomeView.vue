@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <h1>지금 핫한 영화!</h1>
-    <div v-for="(movie, index) in recommendMovie" :key="index">
+    <div v-for="(movie, index) in recommendMovie" :key="index"
+      @click="toDetail(movie.id)"
+    >
       {{ movie }}
       <br><br>
     </div>
@@ -30,6 +32,9 @@ export default {
       this.recommendMovie.push(_.sample(this.popularMovies, 1))
       this.recommendMovie.push(_.sample(this.popularMovies, 1))
       this.recommendMovie.push(_.sample(this.popularMovies, 1))
+    },
+    toDetail(id) {
+      this.$router.push({ name: 'detail', params: {id} })
     }
   },
   created() {
