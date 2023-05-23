@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="RecommendMovies">
-      <h2> {{ user_info.username }} 님의 취향저격 콘텐츠 </h2>
+      <h2> 안녕하세요, {{ user_info.username }} 님 ! </h2>
       <div class="wrapper">
         <div class="text">
           <p style="font-size: 30px; margin-right: 50px"> {{ movie.title }} </p>
@@ -79,8 +79,8 @@ export default {
   margin: 0 0 0 20%;
   --color: white;
   --color-invert: rgb(64, 64, 64);
-  --clip-path: circle(25px at right);
-  --clip-path-hover: circle(300px at right);
+  --clip-path: circle(35px);
+  --clip-path-hover: circle(300px at 10% 40%);
   --clip-path-clicked: circle(800px at right);
   --duration: .4s;
   --timing-function: ease;
@@ -163,8 +163,8 @@ export default {
   left: 0;
 } */
 .wrapper input {
-  width: 400px;
-  height: 100px;
+  width: 300px;
+  height: 200px;
   margin: auto;
   position: absolute;
   left: 0;
