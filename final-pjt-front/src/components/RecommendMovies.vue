@@ -2,8 +2,8 @@
   <div>
     <div>
       <div class="movieCard">
-        <div class="movieimgbox" @click="toDetail(movie.id)">
-          <img :src="imgurl" class="movieimg">
+        <div class="movieimgbox">
+          <img :src="imgurl" class="movieimg" @click="toDetail(movie.id)">
         </div>
         <div class="text">
           <div class="title">
@@ -35,5 +35,6 @@ export default {
 </script>
 
 <style>
-
+.movieCard {
+}
 </style>
