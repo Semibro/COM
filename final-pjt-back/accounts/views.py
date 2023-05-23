@@ -17,5 +17,14 @@ def profile(request, username):
         return Response(serilaizer.data, status=status.HTTP_200_OK)
 
 
-def follow(request):
-    pass
+@api_view(['POST'])
+def follow(request, username):
+    user = request.user
+    person = get_object_or_404(User, username=username)
+    if person != user:
+        if person.followers.filter(pk=user.pk).exists():
+            person.followers.remove(user)
+        else:
+            person.followers.add(user)
+        serializer = UserSerializer(person)
+        return Response(serializer.data, status=status.HTTP_200_OK) 
