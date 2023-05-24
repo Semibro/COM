@@ -7,7 +7,7 @@
     <div v-else>
       <button @click="followUser(masterOfProfile)">팔로우</button>
     </div>
-    <p>팔로워: {{ real_user_info.followings }} 명 </p>
+    <p>팔로워: {{ getFollowingsCount }} 명 </p>
     <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
       {{ movie }}
@@ -37,6 +37,12 @@ export default {
     },
     popularMovies() {
       return this.$store.state.popularMovies
+    },
+    getFollowingsCount() {
+      if (this.real_user_info && this.real_user_info.followings) {
+        return this.real_user_info.followings.length;
+      }
+      return 0;
     },
   },
   methods: {
