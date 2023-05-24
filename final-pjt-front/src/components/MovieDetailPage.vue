@@ -118,7 +118,7 @@ export default {
         .then(res => {
           // console.log(res.data.results[0].key)
           this.youtubeId = res.data.results[0].key
-          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&playlist=${this.youtubeId}`
+          const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&controls=0&playlist=${this.youtubeId}`
           this.youtubesrc = youtubesrc
         })
         .catch(err => console.log(err))
@@ -149,7 +149,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .MovieDetailPage {
   display: flex;
 }
@@ -187,7 +187,7 @@ export default {
 }
 
 .movieimgbox .video iframe {
-  z-index: 10;
+  z-index: 9;
   position: fixed;
   background: #c4cbde;
   top: 50%;
@@ -218,8 +218,6 @@ export default {
           clip-path: var(--clip-path-hover);
 }
 
-
-
 .heart {
   position: absolute;
   top: 2%;
@@ -246,5 +244,20 @@ export default {
 .star {
   margin: 0 2px;
   width: 30px;
+}
+
+.movie_content {
+  z-index: 0;
+  /* margin-top: 6.8%; */
+  width: 65%;
+  height: 80vh;
+  background-color: white;
+  opacity: 20%;
+  border-radius: 0.5rem;
+}
+
+.video {
+  z-index: 10;
+  position: relative;
 }
 </style>
