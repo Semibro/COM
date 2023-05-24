@@ -80,8 +80,8 @@ export default {
   --color: white;
   --color-invert: rgb(64, 64, 64);
   --clip-path: circle(35px);
-  --clip-path-hover: circle(300px at 10% 40%);
-  --clip-path-clicked: circle(800px at right);
+  --clip-path-hover: circle(20vw at 10% 40%);
+  --clip-path-clicked: circle(53vw at right);
   --duration: .4s;
   --timing-function: ease;
   position: relative;

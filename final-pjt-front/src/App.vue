@@ -106,6 +106,7 @@ export default {
   height: 100%;
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 *::-webkit-scrollbar {
@@ -114,7 +115,6 @@ export default {
 
 body {
   margin: 0;
-  overflow: hidden;
 }
 
 .navwrap {
