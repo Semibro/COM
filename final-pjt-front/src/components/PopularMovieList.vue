@@ -33,7 +33,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 0 70px;
-  margin-top: 15px;
+  margin-top: 20px;
   /* margin-left: 27%; */
   width: 200px;
   height: 400px;
@@ -44,6 +44,11 @@ export default {
   border-radius: 0.5rem;
   margin-bottom: 10px;
   height: 300px;
+}
+
+.movieimg:hover {
+  transform: scale(1.21);
+  transition: .4s;
 }
 
 .pptitle {

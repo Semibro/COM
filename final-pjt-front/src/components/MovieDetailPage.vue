@@ -118,10 +118,25 @@ export default {
     star() {
       this.star_point = Math.round(this.detail_movie.vote_average / 2)
     },
+    heart() {
+      const user = this.user_info.pk
+      let flag = 1
+      this.detail_movie.like_users.forEach(user_id => {
+        if (user_id === user) {
+          flag = 2
+          this.isLike = true
+        }
+      })
+      if (flag === 1) {
+        this.isLike = false
+      }
+    },
   },
   created() {
     this.getYoutube(this.detail_movie.id)
     this.star()
+    this.heart()
+    this.$store.dispatch('getUserInfo')
   }
 }
 </script>
