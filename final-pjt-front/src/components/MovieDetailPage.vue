@@ -45,6 +45,9 @@ export default {
     imgurl() {
       return `https://image.tmdb.org/t/p/w300/${this.detail_movie.poster_path}`
     },
+    user_info() {
+      return this.$store.state.user_info
+    }
   },
   methods: {
     likeMovie(id) {
@@ -67,7 +70,7 @@ export default {
     },
     star() {
       this.star_point = Math.round(this.detail_movie.vote_average / 2)
-    }
+    },
   },
   created() {
     this.getYoutube(this.detail_movie.id)

@@ -15,7 +15,7 @@ export default new Vuex.Store({
   state: {
     popularMovies: null,
     detail_movie: null,
-    user_info: null,
+    user_info: null, // 현재 로그인한 유저 정보
   },
   getters: {
   },
