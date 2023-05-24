@@ -90,12 +90,20 @@
           </h2>
           <form @submit.prevent="createReview">
             <label for="content"></label>
-            <input type="text" v-model="inputdata">
+            <input type="text" v-model="inputdata"
+              placeholder="영화와 무관한 댓글이나 스포일러, 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."
+            >
           </form>
           <br>
-          <div v-for="(review, index) in reviews" :key="index">
-            <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
-            <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
+          <div v-for="(review, index) in reviews" :key="index" class="reviewbox">
+            <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> :
+            <span @click="toReviewDetail(review.id, review.user_id)" class="review_content">
+              {{ review.content }}
+            </span>
+            <span class="created_at">
+              {{ review.created_at.substr(0, 10) }}
+            </span>
+            <!-- <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button> -->
           </div>
         </div>
       </div>
@@ -130,7 +138,7 @@ export default {
     },
     user_info() {
       return this.$store.state.user_info
-    }
+    },
   },
   methods: {
     likeMovie(id) {
@@ -229,6 +237,7 @@ export default {
 <style scoped>
 .MovieDetailPage {
   display: flex;
+  height: 100vh;
 }
 
 .movieCard {
@@ -365,6 +374,10 @@ export default {
   cursor: pointer;
 }
 
+.username:hover {
+  color: rgb(48, 48, 48);
+}
+
 .createReviewForm {
   padding-left: 2%;
 }
@@ -376,5 +389,28 @@ export default {
 .icon {
   width: 27px;
   height: 27px;
+}
+
+input {
+  width: 100%;
+  height: 35px;
+  opacity: 50%;
+  border-radius: 0.5rem;
+  border: transparent;
+  padding-left: 15px;
+}
+
+.reviewbox {
+  margin-bottom: 10px;
+}
+
+.created_at {
+  opacity: 40%;
+}
+
+.review_content:hover {
+  color: rgb(48, 48, 48);
+  cursor: pointer;
+  font-weight: bold;
 }
 </style>

@@ -117,6 +117,7 @@ export default {
 
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 .navwrap {
