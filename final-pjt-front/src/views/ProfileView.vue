@@ -1,10 +1,13 @@
 <template>
   <div>
     <h1> {{ masterOfProfile }} 님의 프로필</h1>
-    <div v-if="masterOfProfile != user_info.username">
-      <button @click="followUser(masterOfProfile)">팔로우/언팔로우</button>
+    <div v-if="follow_check">
+      <button @click="followUser(masterOfProfile)">언팔로우</button>
     </div>
-    <p>팔로워: {{ real_user_info.followings.length }} 명 </p>
+    <div v-else>
+      <button @click="followUser(masterOfProfile)">팔로우</button>
+    </div>
+    <p>팔로워: {{ real_user_info.followings }} 명 </p>
     <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
       {{ movie }}
@@ -22,8 +25,10 @@ export default {
   data() {
     return {
       like_movie_list: [],
-      real_user_info: null,
-      masterOfProfile: this.$route.params.username
+      real_user_info: [],
+      masterOfProfile: this.$route.params.username,
+      profile_data: [],
+      follow_check: null,
     }
   },
   computed: {
@@ -32,7 +37,7 @@ export default {
     },
     popularMovies() {
       return this.$store.state.popularMovies
-    }
+    },
   },
   methods: {
     getProfile() {
@@ -48,6 +53,7 @@ export default {
           // console.log(res)
           this.real_user_info = res.data
           this.like_movie_list = res.data.like_movies
+          this.is_follow()
         })
         .catch(err => {
           console.log(err)
@@ -62,12 +68,28 @@ export default {
           Authorization: `Bearer ${ token }`
         },
       })
-        .then(() => {
+        .then(res => {
+          console.log(res)
+          this.profile_data = res.data
           this.getProfile()
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    is_follow() {
+      const user = this.$store.state.user_info
+      console.log(user)
+      let flag = 1
+      this.profile_data.followings.forEach(follower => {
+        if (follower === user.pk) {
+          this.follow_check = true
+          flag = 2
+        }
+      })
+      if (flag === 1) {
+        this.follow_check = false
+      }
     }
   },
   created() {
