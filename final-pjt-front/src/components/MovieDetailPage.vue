@@ -6,9 +6,14 @@
         <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
           class="heart" v-if="isLike"
         >
-        <img src="@/assets/icon/bin_heart.png" @click="likeMovie(detail_movie.id)"
-          class="heart" v-else
-        >
+        <div class="heart" v-else>
+          <img src="@/assets/icon/bin_heart.png" @click="likeMovie(detail_movie.id)"
+            class="bin_heart"
+          >
+          <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
+            class="full_heart"
+          >
+        </div>
       </div>
       <div class="title_text">
           <h3>{{ detail_movie.title }}</h3>
@@ -163,6 +168,22 @@ export default {
   top: 2%;
   right: 3%;
   cursor: pointer;
+}
+
+.bin_heart {
+  position: relative;
+}
+
+.full_heart {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  opacity: 0;
+}
+
+.heart:hover > .full_heart {
+  opacity: 1;
+  transition: opacity 0.3s;
 }
 
 .star {
