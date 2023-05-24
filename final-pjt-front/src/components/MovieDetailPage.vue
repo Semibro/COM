@@ -74,24 +74,31 @@
     </div>
     <div class="movie_content_wrap">
       <div class="movie_content">
-        <div class="date">
-          개봉 : {{ detail_movie.release_date }}
+        <div class="datewrap">
+          <img src="@/assets/icon/calendar.png" class="icon">
+          <div class="date">
+            개봉 : {{ detail_movie.release_date }}
+          </div>
         </div>
         <div class="overview">
           {{ detail_movie.overview }}
         </div>
+        <div class="createReviewForm">
+          <h2>
+            <img src="@/assets/icon/pencil.png" class="icon">
+            리뷰쓰기
+          </h2>
+          <form @submit.prevent="createReview">
+            <label for="content"></label>
+            <input type="text" v-model="inputdata">
+          </form>
+          <br>
+          <div v-for="(review, index) in reviews" :key="index">
+            <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
+            <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
+          </div>
+        </div>
       </div>
-    </div>
-
-
-    <form @submit.prevent="createReview">
-      <label for="content">내용 : </label>
-     <input type="text" v-model="inputdata">
-    </form>
-    <br>
-    <div v-for="(review, index) in reviews" :key="index">
-      <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
-      <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
     </div>
   </div>
 </template>
@@ -334,21 +341,40 @@ export default {
   margin: 4% 5%;
 }
 
-.date {
+.datewrap {
+  display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  padding-bottom: 2%;
+  padding-bottom: 15px;
   margin-bottom: 3%;
   padding-left: 2%;
+}
+
+.date {
   font-size: 20px;
+  margin-left: 7px;
 }
 
 .overview {
   padding-left: 2%;
   line-height: 35px;
   font-size: 17px;
+  margin-bottom: 5%;
 }
 
 .username {
   cursor: pointer;
+}
+
+.createReviewForm {
+  padding-left: 2%;
+}
+
+.createReviewForm h2 {
+  margin-bottom: 10px;
+}
+
+.icon {
+  width: 27px;
+  height: 27px;
 }
 </style>
