@@ -8,7 +8,7 @@
     </form>
     <br>
     <div v-for="(review, index) in reviews" :key="index">
-      {{ review.user }} : {{ review.content }}
+      <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
       <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
     </div>
   </div>
@@ -81,6 +81,9 @@ export default {
       // console.log(id)
       const params_id = {movie_id: movie, review_id: id, user_id: user_id,}
       this.$router.push({ name: 'review_detail', params: params_id })
+    },
+    toProfile(username) {
+      this.$router.push({ name: 'profile', params: {username} })
     }
   },
   created() {
@@ -91,5 +94,7 @@ export default {
 </script>
 
 <style>
-
+.username {
+  cursor: pointer;
+}
 </style>
