@@ -90,11 +90,20 @@
           </h2>
           <form @submit.prevent="createReview">
             <label for="content"></label>
-            <input type="text" v-model="inputdata"
-              placeholder="영화와 무관한 댓글이나 스포일러, 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."
-            >
-            <input type="number" v-model="rate_data">
-            <input type="submit">
+            <div class="review_form_box">
+              <select name="user_rate" id="user_rate" v-model="rate_data">
+                <option class="option" value="1">⭐</option>
+                <option class="option" value="2">⭐⭐</option>
+                <option class="option" value="3">⭐⭐⭐</option>
+                <option class="option" value="4">⭐⭐⭐⭐</option>
+                <option class="option" value="5">⭐⭐⭐⭐⭐</option>
+              </select>
+              <input type="text" v-model="inputdata"
+                placeholder="영화와 무관한 댓글이나 스포일러, 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."
+              >
+            </div>
+            <!-- <input type="number" v-model="rate_data"> -->
+            <input type="submit" style="display: none">
           </form>
           <br>
           <div v-for="(review, index) in reviews" :key="index" class="reviewbox">
@@ -173,7 +182,7 @@ export default {
       star_point: null,
       isLike: false,
       inputdata: null,
-      rate_data: 0,
+      rate_data: 1,
       reviews: [],
       written_user: null,
     }
@@ -241,7 +250,7 @@ export default {
             console.log(res)
             this.getReviewDetail()
             this.inputdata = null
-            this.rate_data = null
+            this.rate_data = 1
         })
         .catch(err => console.log(err))
     },
@@ -454,6 +463,15 @@ input {
   padding-left: 15px;
 }
 
+select {
+  width: 115px;
+  height: 35px;
+  opacity: 50%;
+  border-radius: 0.5rem;
+  border: transparent;
+  margin-right: 10px;
+}
+
 .reviewbox {
   margin-bottom: 10px;
 }
@@ -466,5 +484,9 @@ input {
   color: rgb(48, 48, 48);
   cursor: pointer;
   font-weight: bold;
+}
+
+.review_form_box {
+  display: flex;
 }
 </style>
