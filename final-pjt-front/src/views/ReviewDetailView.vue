@@ -7,7 +7,7 @@
     </div>
     <form @submit.prevent="createComment">
       <label for="content">내용 : </label>
-     <input type="text" v-model="inputdata">
+      <input type="text" v-model="inputdata">
     </form>
     <div v-for="(comment, index) in comments" :key="index">
       <span class="pointer" @click="toProfile(comment.user)">{{ comment.user }}</span> : {{ comment.content }}
