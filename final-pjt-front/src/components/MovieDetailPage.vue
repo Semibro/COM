@@ -101,7 +101,49 @@
             <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> :
             <span @click="toReviewDetail(review.id, review.user_id)" class="review_content">
               {{ review.content }}
-              {{ review.rate }}  <!-- 평점 -->
+              <span class="point_5" v-if="review.rate===5">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+              </span>
+              <span class="point_4" v-if="review.rate===4">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+              </span>
+              <span class="point_3" v-if="review.rate===3">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+              </span>
+              <span class="point_2" v-if="review.rate===2">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+              </span>
+              <span class="point_1" v-if="review.rate===1">
+                <img src="@/assets/icon/full_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+              </span>
+              <span class="point_0" v-if="review.rate===0">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+                <img src="@/assets/icon/bin_star.png" class="star_user">
+              </span>
+              <!-- {{ review.rate }} -->
             </span>
             <span class="created_at">
               {{ review.created_at.substr(0, 10) }}
@@ -335,6 +377,11 @@ export default {
 .star {
   margin: 0 2px;
   width: 30px;
+}
+
+.star_user {
+  margin: 0 2px;
+  width: 16px;
 }
 
 .movie_content_wrap {
