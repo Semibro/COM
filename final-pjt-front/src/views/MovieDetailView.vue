@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>영화 디테일 페이지</h1>
     <MovieDetailPage :detail_movie="detail_movie"/>
     <br>
     <form @submit.prevent="createReview">

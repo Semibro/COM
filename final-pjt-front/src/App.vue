@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="navwrap">
-      <img src="@/assets/logo.png" class="logo">
+      <img src="@/assets/logo.png" class="logo" @click="toHome">
       <nav>
         <span v-if="isLogin" class="menu">
           <router-link to="/">Home</router-link>
@@ -39,6 +39,9 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       this.$router.push({ name: 'login' })
+    },
+    toHome() {
+      this.$router.push({ name: 'home' }).catch(()=>{})
     }
   },
   created() {

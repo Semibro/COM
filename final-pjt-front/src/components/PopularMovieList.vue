@@ -1,9 +1,11 @@
 <template>
   <div class="PopularMovieList">
-    <div class="movieCard">
-      <img :src="imgurl" class="movieimg" @click="toDetail(movie.id)">
-      {{ movie.title }}
-    </div>
+      <div class="movieCard">
+        <img :src="imgurl" class="movieimg" @click="toDetail(movie.id)">
+        <div class="pptitle">
+          {{ movie.title }}
+        </div>
+      </div>
   </div>
 </template>
 
@@ -26,18 +28,26 @@ export default {
 }
 </script>
 
-<style>
-.PopularMovieList {
-  display: flex;
-  flex-direction: row;
-}
-
+<style scoped>
 .movieCard {
   display: flex;
   flex-direction: column;
+  padding: 0 70px;
+  margin-top: 15px;
+  /* margin-left: 27%; */
+  width: 200px;
+  height: 400px;
 }
 
 .movieimg {
   cursor: pointer;
+  border-radius: 0.5rem;
+  margin-bottom: 10px;
+  height: 300px;
+}
+
+.pptitle {
+  font-size: 17px;
+  font-weight: 800;
 }
 </style>
