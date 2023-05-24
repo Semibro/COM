@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="navwrap">
-      <img src="@/assets/logo.png" class="logo" @click="toHome">
+      <span class="logobox logo">
+        <img src="@/assets/logo.png" style="width: 13vw" @click="toHome">
+        <img src="@/assets/logo2.png" class="logo2" style="width: 13vw" @click="toHome">
+      </span>
       <nav>
         <span v-if="isLogin" class="menu">
           <router-link to="/">Home</router-link>
@@ -125,12 +128,27 @@ body {
   justify-content: space-between;
 }
 
+.logobox {
+  position: relative;
+}
+
 .logo {
   margin-left: 7%;
-  width: 13vw;
+  /* width: 13vw; */
   cursor: pointer;
   margin-top: 10px;
   z-index: 2;
+}
+
+.logo2 {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+}
+
+.logo2:hover {
+  opacity: 1;
+  transition: opacity 0.4s;
 }
 
 nav {
