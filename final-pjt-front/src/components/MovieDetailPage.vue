@@ -101,7 +101,7 @@
             <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> :
             <span @click="toReviewDetail(review.id, review.user_id)" class="review_content">
               {{ review.content }}
-              {{ review.rate }}
+              {{ review.rate }}  <!-- 평점 -->
             </span>
             <span class="created_at">
               {{ review.created_at.substr(0, 10) }}
