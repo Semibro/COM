@@ -93,12 +93,15 @@
             <input type="text" v-model="inputdata"
               placeholder="영화와 무관한 댓글이나 스포일러, 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."
             >
+            <input type="number" v-model="rate_data">
+            <input type="submit">
           </form>
           <br>
           <div v-for="(review, index) in reviews" :key="index" class="reviewbox">
             <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> :
             <span @click="toReviewDetail(review.id, review.user_id)" class="review_content">
               {{ review.content }}
+              {{ review.rate }}
             </span>
             <span class="created_at">
               {{ review.created_at.substr(0, 10) }}
@@ -128,6 +131,7 @@ export default {
       star_point: null,
       isLike: false,
       inputdata: null,
+      rate_data: 0,
       reviews: [],
       written_user: null,
     }
@@ -177,6 +181,7 @@ export default {
     },
     createReview() {
       const content = this.inputdata
+      const rate = Number(this.rate_data)
       if (!content) {
         alert('내용을 입력해주세요')
         return
@@ -185,14 +190,16 @@ export default {
       axios({
         method: 'post',
         url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
-        data: { content },
+        data: { content, rate },
         headers: {
           Authorization: `Bearer ${ token }`
         }
       })
-        .then(() => {
+        .then(res => {
+            console.log(res)
             this.getReviewDetail()
             this.inputdata = null
+            this.rate_data = null
         })
         .catch(err => console.log(err))
     },

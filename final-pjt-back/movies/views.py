@@ -49,6 +49,7 @@ def review_create_or_list(request, movie_pk):
     movie = get_object_or_404(Movie, id=movie_pk)
     review = movie.review_set.all()
     if request.method == 'POST':
+        print(request.data)
         serializer = ReviewCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
