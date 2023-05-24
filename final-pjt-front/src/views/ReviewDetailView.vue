@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ review.user }}
+    <span class="pointer" @click="toProfile(review.user)">{{ review.user }}</span>
     {{ review.content }}
     <div v-if="this.$route.params.user_id === this.user_info.pk">
       <button @click="deleteReview(review.id)">DELETE</button>
@@ -10,7 +10,7 @@
      <input type="text" v-model="inputdata">
     </form>
     <div v-for="(comment, index) in comments" :key="index">
-      {{ comment.user }} : {{ comment.content }}
+      <span class="pointer" @click="toProfile(comment.user)">{{ comment.user }}</span> : {{ comment.content }}
       <button @click="deleteComment(comment.id)">DELETE</button>
     </div>
   </div>
@@ -121,6 +121,9 @@ export default {
           console.log(err)
         })
     },
+    toProfile(username) {
+      this.$router.push({ name: 'profile', params: {username} })
+    }
   },
   created() {
     this.getReviewDetail()
@@ -131,5 +134,7 @@ export default {
 </script>
 
 <style>
-
+.pointer {
+  cursor: pointer;
+}
 </style>
