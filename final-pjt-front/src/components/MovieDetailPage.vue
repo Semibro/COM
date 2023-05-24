@@ -75,10 +75,11 @@
         </div>
       </div>
     </div>
-    <div class="movie_content">
-      {{ detail_movie.release_date }}
-      {{ detail_movie.overview }}
-      <!-- <iframe width="1000px" height="700px" :src="youtubesrc" loop muted autoplay></iframe> -->
+    <div class="movie_content_wrap">
+      <div class="movie_content">
+        {{ detail_movie.release_date }}
+        {{ detail_movie.overview }}
+      </div>
     </div>
   </div>
 </template>
@@ -198,7 +199,6 @@ export default {
 }
 
 .only_title .video iframe {
-  z-index: 9;
   position: fixed;
   background: #c4cbde;
   top: 50%;
@@ -213,7 +213,6 @@ export default {
 
 .real_title {
   border-radius: 0.5rem;
-  z-index: 2;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -257,18 +256,20 @@ export default {
   width: 30px;
 }
 
-.movie_content {
-  z-index: 0;
-  /* margin-top: 6.8%; */
+.movie_content_wrap {
   width: 65%;
   height: 80vh;
-  background-color: white;
-  opacity: 20%;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 0.5rem;
 }
 
 .video {
   z-index: 10;
   position: relative;
+}
+
+.movie_content {
+  color: white;
+  opacity: 100%;
 }
 </style>
