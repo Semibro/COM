@@ -1,16 +1,8 @@
 <template>
-  <div>
-    <div>
-      <div class="movieCard">
-        <div class="movieimgbox" @click="toDetail(movie.id)">
-          <img :src="imgurl" class="movieimg">
-        </div>
-        <div class="text">
-          <div class="title">
-            {{ movie.title }}
-          </div>
-        </div>
-      </div>
+  <div class="PopularMovieList">
+    <div class="movieCard">
+      <img :src="imgurl" class="movieimg" @click="toDetail(movie.id)">
+      {{ movie.title }}
     </div>
   </div>
 </template>
@@ -35,5 +27,17 @@ export default {
 </script>
 
 <style>
+.PopularMovieList {
+  display: flex;
+  flex-direction: row;
+}
 
+.movieCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.movieimg {
+  cursor: pointer;
+}
 </style>

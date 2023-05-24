@@ -12,7 +12,6 @@
 
         <span v-else>
           <router-link to="/">Home</router-link>
-          <router-link to="/movies">Movies</router-link>
           <router-link to="/login">Login</router-link>
           <router-link to="/signup">Signup</router-link>
         </span>
@@ -127,6 +126,7 @@ body {
   width: 13vw;
   cursor: pointer;
   margin-top: 10px;
+  z-index: 2;
 }
 
 nav {
