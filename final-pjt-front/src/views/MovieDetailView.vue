@@ -17,5 +17,8 @@ export default {
       return this.$store.state.detail_movie
     },
   },
+  created() {
+    this.$store.dispatch('toDetail', this.$route.params.id)
+  }
 }
 </script>
