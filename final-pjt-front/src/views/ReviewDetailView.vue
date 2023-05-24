@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{ review.user }}
+    {{ review.content }}
     <div v-if="this.$route.params.user_id === this.user_info.pk">
       <button @click="deleteReview(review.id)">DELETE</button>
     </div>

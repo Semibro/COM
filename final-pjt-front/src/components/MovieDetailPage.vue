@@ -3,9 +3,6 @@
     <div class="movieCard">
       <div class="movieimgbox">
         <img :src="imgurl" class="movieimg">
-        <!-- <div class="video">
-          <iframe width="1000px" height="500px" :src="youtubesrc" loop muted autoplay></iframe>
-        </div> -->
         <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
           class="heart" v-if="isLike"
         >
@@ -77,10 +74,25 @@
     </div>
     <div class="movie_content_wrap">
       <div class="movie_content">
-        {{ detail_movie.release_date }}
-        {{ detail_movie.overview }}
+        <div class="date">
+          개봉 : {{ detail_movie.release_date }}
+        </div>
+        <div class="overview">
+          {{ detail_movie.overview }}
+        </div>
       </div>
     </div>
+
+<!-- 
+    <form @submit.prevent="createReview">
+      <label for="content">내용 : </label>
+     <input type="text" v-model="inputdata">
+    </form>
+    <br>
+    <div v-for="(review, index) in reviews" :key="index">
+      <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
+      <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
+    </div> -->
   </div>
 </template>
 
@@ -100,6 +112,9 @@ export default {
       youtubesrc: null,
       star_point: null,
       isLike: false,
+      // inputdata: null,
+      // reviews: [],
+      // written_user: null,
     }
   },
   computed: {
@@ -145,12 +160,61 @@ export default {
         this.isLike = false
       }
     },
+    // createReview() {
+    //   const content = this.inputdata
+    //   if (!content) {
+    //     alert('내용을 입력해주세요')
+    //     return
+    //   }
+    //   const token = localStorage.getItem('jwt')
+    //   axios({
+    //     method: 'post',
+    //     url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+    //     data: { content },
+    //     headers: {
+    //       Authorization: `Bearer ${ token }`
+    //     }
+    //   })
+    //     .then(() => {
+    //         this.getReviewDetail()
+    //         this.inputdata = null
+    //     })
+    //     .catch(err => console.log(err))
+    // },
+    // getReviewDetail() {
+    //   const token = localStorage.getItem('jwt')
+    //   axios({
+    //     method: 'get',
+    //     url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+    //     headers: {
+    //       Authorization: `Bearer ${ token }`
+    //     },
+    //   })
+    //     .then(res => {
+    //       this.reviews = res.data
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // },
+    // toReviewDetail(id, user_id) {
+    //   // console.log(this.$route.params.id)
+    //   const movie = this.$route.params.id
+    //   // console.log(id)
+    //   const params_id = {movie_id: movie, review_id: id, user_id: user_id,}
+    //   this.$router.push({ name: 'review_detail', params: params_id })
+    // },
+    // toProfile(username) {
+    //   this.$router.push({ name: 'profile', params: {username} })
+    // },
   },
   created() {
     this.getYoutube(this.detail_movie.id)
     this.star()
     this.heart()
     this.$store.dispatch('getUserInfo')
+    // this.$store.dispatch('toDetail', this.$route.params.id)
+    // this.getReviewDetail()
   }
 }
 </script>
@@ -166,10 +230,10 @@ export default {
 
 .movieimgbox {
   position: relative;
-  /* --clip-path: circle(0.1px);
-  --clip-path-hover: circle(50vw);
-  --clip-path-clicked: circle(50vw);
-  --timing-function: ease; */
+}
+
+.movieimg {
+  border-radius: 0.5rem;
 }
 
 .only_title {
@@ -179,14 +243,8 @@ export default {
   --timing-function: ease;
 }
 
-/* .movieimgbox:hover .heart {
-  opacity: 0;
-} */
-
 .only_title .video {
   width: 10vw;
-  /* height: 100vh; */
-  /* overflow: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -269,7 +327,24 @@ export default {
 }
 
 .movie_content {
+  font-weight: bold;
+  text-align: start;
   color: white;
   opacity: 100%;
+  margin: 4% 5%;
+}
+
+.date {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 2%;
+  margin-bottom: 3%;
+  padding-left: 2%;
+  font-size: 20px;
+}
+
+.overview {
+  padding-left: 2%;
+  line-height: 35px;
+  font-size: 17px;
 }
 </style>
