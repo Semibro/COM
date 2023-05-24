@@ -108,7 +108,7 @@ export default {
     likeMovie(id) {
       this.$store.dispatch('likeMovie', id)
       this.isLike = !this.isLike
-      console.log(this.isLike)
+      this.saveLikeStatus()
     },
     getYoutube(id) {
       axios({
@@ -139,12 +139,27 @@ export default {
         this.isLike = false
       }
     },
+    saveLikeStatus() {
+      localStorage.setItem('likeStatus', this.isLike.toString())
+    },
+    restoreLikeStatus() {
+      const likeStatus = localStorage.getItem('likeStatus')
+      if (likeStatus === 'true') {
+        this.isLike = true
+      } else {
+        this.isLike = false
+      }
+    },
   },
   created() {
     this.getYoutube(this.detail_movie.id)
     this.star()
     this.heart()
     this.$store.dispatch('getUserInfo')
+  },
+  mounted() {
+    this.heart()
+    this.restoreLikeStatus()
   }
 }
 </script>
