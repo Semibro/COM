@@ -12,7 +12,54 @@
       </div>
       <div class="title_text">
           <h3>{{ detail_movie.title }}</h3>
-          {{ star_point }} / {{ detail_movie.vote_count }}
+          <div class="point_5" v-if="star_point===5">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
+          <div class="point_4" v-if="star_point===4">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
+          <div class="point_3" v-if="star_point===3">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
+          <div class="point_2" v-if="star_point===2">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
+          <div class="point_1" v-if="star_point===1">
+            <img src="@/assets/icon/full_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
+          <div class="point_0" v-if="star_point===0">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            <img src="@/assets/icon/bin_star.png" class="star">
+            ({{ detail_movie.vote_count }})
+          </div>
       </div>
     </div>
     <div class="movie_content">
@@ -101,5 +148,10 @@ export default {
   top: 2%;
   right: 3%;
   cursor: pointer;
+}
+
+.star {
+  margin: 0 2px;
+  width: 30px;
 }
 </style>
