@@ -3,9 +3,9 @@
     <div class="movieCard">
       <div class="movieimgbox">
         <img :src="imgurl" class="movieimg">
-        <div class="video">
+        <!-- <div class="video">
           <iframe width="1000px" height="500px" :src="youtubesrc" loop muted autoplay></iframe>
-        </div>
+        </div> -->
         <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
           class="heart" v-if="isLike"
         >
@@ -19,55 +19,60 @@
         </div>
       </div>
       <div class="title_text">
-          <h3>{{ detail_movie.title }}</h3>
-          <div class="point_5" v-if="star_point===5">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            ({{ detail_movie.vote_count }})
+        <div class="only_title">
+          <h3 class="real_title">{{ detail_movie.title }}</h3>
+          <div class="video">
+            <iframe width="1000px" height="500px" :src="youtubesrc" loop muted autoplay></iframe>
           </div>
-          <div class="point_4" v-if="star_point===4">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            ({{ detail_movie.vote_count }})
-          </div>
-          <div class="point_3" v-if="star_point===3">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            ({{ detail_movie.vote_count }})
-          </div>
-          <div class="point_2" v-if="star_point===2">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            ({{ detail_movie.vote_count }})
-          </div>
-          <div class="point_1" v-if="star_point===1">
-            <img src="@/assets/icon/full_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            ({{ detail_movie.vote_count }})
-          </div>
-          <div class="point_0" v-if="star_point===0">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            <img src="@/assets/icon/bin_star.png" class="star">
-            ({{ detail_movie.vote_count }})
-          </div>
+        </div>
+        <div class="point_5" v-if="star_point===5">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
+        <div class="point_4" v-if="star_point===4">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
+        <div class="point_3" v-if="star_point===3">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
+        <div class="point_2" v-if="star_point===2">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
+        <div class="point_1" v-if="star_point===1">
+          <img src="@/assets/icon/full_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
+        <div class="point_0" v-if="star_point===0">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          <img src="@/assets/icon/bin_star.png" class="star">
+          ({{ detail_movie.vote_count }})
+        </div>
       </div>
     </div>
     <div class="movie_content">
@@ -160,18 +165,24 @@ export default {
 
 .movieimgbox {
   position: relative;
+  /* --clip-path: circle(0.1px);
+  --clip-path-hover: circle(50vw);
+  --clip-path-clicked: circle(50vw);
+  --timing-function: ease; */
+}
+
+.only_title {
   --clip-path: circle(0.1px);
   --clip-path-hover: circle(50vw);
   --clip-path-clicked: circle(50vw);
-  /* --duration: .1s; */
   --timing-function: ease;
 }
 
-.movieimgbox:hover .heart {
+/* .movieimgbox:hover .heart {
   opacity: 0;
-}
+} */
 
-.movieimgbox .video {
+.only_title .video {
   width: 10vw;
   /* height: 100vh; */
   /* overflow: hidden; */
@@ -186,7 +197,7 @@ export default {
   transition: clip-path var(--duration) var(--timing-function), -webkit-clip-path var(--duration) var(--timing-function);
 }
 
-.movieimgbox .video iframe {
+.only_title .video iframe {
   z-index: 9;
   position: fixed;
   background: #c4cbde;
@@ -200,7 +211,7 @@ export default {
           transform: translate(-50%, -50%);
 }
 
-.movieimg {
+.real_title {
   border-radius: 0.5rem;
   z-index: 2;
   -webkit-appearance: none;
@@ -209,11 +220,11 @@ export default {
   cursor: pointer;
 }
 
-.movieimg:focus {
+.real_title:focus {
   outline: 0;
 }
 
-.movieimg:hover ~ .video {
+.real_title:hover ~ .video {
   -webkit-clip-path: var(--clip-path-hover);
           clip-path: var(--clip-path-hover);
 }
