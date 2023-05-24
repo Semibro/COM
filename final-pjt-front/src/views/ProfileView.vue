@@ -46,6 +46,20 @@ export default {
     },
   },
   methods: {
+    is_follow() {
+      const user = this.$store.state.user_info
+      console.log(user)
+      let flag = 1
+      this.profile_data.followings.forEach(follower => {
+        if (follower === user.pk) {
+          this.follow_check = true
+          flag = 2
+        }
+      })
+      if (flag === 1) {
+        this.follow_check = false
+      }
+    },
     getProfile() {
       const token = localStorage.getItem('jwt')
       axios({
@@ -56,7 +70,6 @@ export default {
         },
       })
         .then(res => {
-          // console.log(res)
           this.real_user_info = res.data
           this.like_movie_list = res.data.like_movies
           this.is_follow()
@@ -83,24 +96,20 @@ export default {
           console.log(err)
         })
     },
-    is_follow() {
-      const user = this.$store.state.user_info
-      console.log(user)
-      let flag = 1
-      this.profile_data.followings.forEach(follower => {
-        if (follower === user.pk) {
-          this.follow_check = true
-          flag = 2
-        }
-      })
-      if (flag === 1) {
-        this.follow_check = false
-      }
-    }
   },
   created() {
     this.getProfile()
     this.$store.dispatch('getUserInfo')
+    const followCheck = localStorage.getItem('follow_check')
+    this.follow_check = followCheck === 'true'
+  },
+  mounted() {
+    this.getProfile()
+  },
+  watch: {
+    follow_check(newVal) {
+      localStorage.setItem('follow_check', newVal)
+    }
   }
 }
 </script>
