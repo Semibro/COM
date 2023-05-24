@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1> {{ masterOfProfile }} 님의 프로필</h1>
-    <div v-if="follow_check">
-      <button @click="followUser(masterOfProfile)">언팔로우</button>
+    <div class="userinfo_box">
+      <img src="@/assets/gamsung.png">
+      <div class="user_info">
+        <h1> {{ masterOfProfile }} 님</h1>
+        <div v-if="follow_check">
+          <button @click="followUser(masterOfProfile)">언팔로우</button>
+        </div>
+        <div v-else>
+          <button @click="followUser(masterOfProfile)">팔로우</button>
+        </div>
+        <p>팔로워: {{ getFollowingsCount }} 명 </p>
+      </div>
     </div>
-    <div v-else>
-      <button @click="followUser(masterOfProfile)">팔로우</button>
-    </div>
-    <p>팔로워: {{ getFollowingsCount }} 명 </p>
     <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
       {{ movie }}
@@ -115,5 +120,18 @@ export default {
 </script>
 
 <style>
+.userinfo_box {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  height: 60vh;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
+.userinfo_box img {
+  border-radius: 0.5rem;
+  width: 300px;
+  height: 300px;
+  margin-left: 7%;
+}
 </style>
