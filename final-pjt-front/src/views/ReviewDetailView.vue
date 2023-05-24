@@ -122,7 +122,7 @@ export default {
         })
     },
     toProfile(username) {
-      this.$router.push({ name: 'profile', params: {username} })
+      this.$router.push({ name: 'profile', params: {username} })  // 프로필 이동
     }
   },
   created() {
