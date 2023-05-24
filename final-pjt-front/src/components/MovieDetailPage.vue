@@ -3,6 +3,9 @@
     <div class="movieCard">
       <div class="movieimgbox">
         <img :src="imgurl" class="movieimg">
+        <div class="video">
+          <iframe width="1000px" height="500px" :src="youtubesrc" loop muted autoplay></iframe>
+        </div>
         <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
           class="heart" v-if="isLike"
         >
@@ -70,7 +73,7 @@
     <div class="movie_content">
       {{ detail_movie.release_date }}
       {{ detail_movie.overview }}
-      <iframe width="1000px" height="700px" :src="youtubesrc"></iframe>
+      <!-- <iframe width="1000px" height="700px" :src="youtubesrc" loop muted autoplay></iframe> -->
     </div>
   </div>
 </template>
@@ -157,11 +160,65 @@ export default {
 
 .movieimgbox {
   position: relative;
+  --clip-path: circle(0.1px);
+  --clip-path-hover: circle(50vw);
+  --clip-path-clicked: circle(50vw);
+  /* --duration: .1s; */
+  --timing-function: ease;
+}
+
+.movieimgbox:hover .heart {
+  opacity: 0;
+}
+
+.movieimgbox .video {
+  width: 10vw;
+  /* height: 100vh; */
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  -webkit-clip-path: var(--clip-path);
+          clip-path: var(--clip-path);
+  transition: -webkit-clip-path var(--duration) var(--timing-function);
+  transition: clip-path var(--duration) var(--timing-function);
+  transition: clip-path var(--duration) var(--timing-function), -webkit-clip-path var(--duration) var(--timing-function);
+}
+
+.movieimgbox .video iframe {
+  z-index: 10;
+  position: fixed;
+  background: #c4cbde;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .movieimg {
   border-radius: 0.5rem;
+  z-index: 2;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
 }
+
+.movieimg:focus {
+  outline: 0;
+}
+
+.movieimg:hover ~ .video {
+  -webkit-clip-path: var(--clip-path-hover);
+          clip-path: var(--clip-path-hover);
+}
+
+
 
 .heart {
   position: absolute;
