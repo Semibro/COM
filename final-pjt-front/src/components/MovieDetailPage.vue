@@ -83,7 +83,7 @@
       </div>
     </div>
 
-<!-- 
+
     <form @submit.prevent="createReview">
       <label for="content">내용 : </label>
      <input type="text" v-model="inputdata">
@@ -92,13 +92,13 @@
     <div v-for="(review, index) in reviews" :key="index">
       <span class="username" @click="toProfile(review.user)">{{ review.user }}</span> : {{ review.content }}
       <button @click="toReviewDetail(review.id, review.user_id)">DETAIL</button>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// const API_URL = 'http://127.0.0.1:8000'
+const API_URL = 'http://127.0.0.1:8000'
 const API_KEY = 'cab515bc24cb97ee07d658f5fd0aa1a7'
 
 export default {
@@ -112,9 +112,9 @@ export default {
       youtubesrc: null,
       star_point: null,
       isLike: false,
-      // inputdata: null,
-      // reviews: [],
-      // written_user: null,
+      inputdata: null,
+      reviews: [],
+      written_user: null,
     }
   },
   computed: {
@@ -137,7 +137,7 @@ export default {
         url: `https://api.themoviedb.org/3/movie/${id}/videos?&api_key=${API_KEY}`
       })
         .then(res => {
-          // console.log(res.data.results[0].key)
+          console.log(res.data.results[0].key)
           this.youtubeId = res.data.results[0].key
           const youtubesrc = `https://www.youtube.com/embed/${this.youtubeId}?autoplay=1&mute=1&controls=0&playlist=${this.youtubeId}`
           this.youtubesrc = youtubesrc
@@ -160,61 +160,61 @@ export default {
         this.isLike = false
       }
     },
-    // createReview() {
-    //   const content = this.inputdata
-    //   if (!content) {
-    //     alert('내용을 입력해주세요')
-    //     return
-    //   }
-    //   const token = localStorage.getItem('jwt')
-    //   axios({
-    //     method: 'post',
-    //     url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
-    //     data: { content },
-    //     headers: {
-    //       Authorization: `Bearer ${ token }`
-    //     }
-    //   })
-    //     .then(() => {
-    //         this.getReviewDetail()
-    //         this.inputdata = null
-    //     })
-    //     .catch(err => console.log(err))
-    // },
-    // getReviewDetail() {
-    //   const token = localStorage.getItem('jwt')
-    //   axios({
-    //     method: 'get',
-    //     url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
-    //     headers: {
-    //       Authorization: `Bearer ${ token }`
-    //     },
-    //   })
-    //     .then(res => {
-    //       this.reviews = res.data
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // },
-    // toReviewDetail(id, user_id) {
-    //   // console.log(this.$route.params.id)
-    //   const movie = this.$route.params.id
-    //   // console.log(id)
-    //   const params_id = {movie_id: movie, review_id: id, user_id: user_id,}
-    //   this.$router.push({ name: 'review_detail', params: params_id })
-    // },
-    // toProfile(username) {
-    //   this.$router.push({ name: 'profile', params: {username} })
-    // },
+    createReview() {
+      const content = this.inputdata
+      if (!content) {
+        alert('내용을 입력해주세요')
+        return
+      }
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+        data: { content },
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(() => {
+            this.getReviewDetail()
+            this.inputdata = null
+        })
+        .catch(err => console.log(err))
+    },
+    getReviewDetail() {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${this.$route.params.id}/reviews/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        },
+      })
+        .then(res => {
+          this.reviews = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    toReviewDetail(id, user_id) {
+      // console.log(this.$route.params.id)
+      const movie = this.$route.params.id
+      // console.log(id)
+      const params_id = {movie_id: movie, review_id: id, user_id: user_id,}
+      this.$router.push({ name: 'review_detail', params: params_id })
+    },
+    toProfile(username) {
+      this.$router.push({ name: 'profile', params: {username} })
+    },
   },
   created() {
     this.getYoutube(this.detail_movie.id)
     this.star()
     this.heart()
     this.$store.dispatch('getUserInfo')
-    // this.$store.dispatch('toDetail', this.$route.params.id)
-    // this.getReviewDetail()
+    this.$store.dispatch('toDetail', this.$route.params.id)
+    this.getReviewDetail()
   }
 }
 </script>
@@ -346,5 +346,9 @@ export default {
   padding-left: 2%;
   line-height: 35px;
   font-size: 17px;
+}
+
+.username {
+  cursor: pointer;
 }
 </style>
