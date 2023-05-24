@@ -1,23 +1,24 @@
 <template>
-  <div>
-     <div>
-      <div class="movieCard">
-        <div class="movieimgbox">
-          <img :src="imgurl" class="movieimg">
-        </div>
-        <div class="text">
-          <div class="title">
-            <button @click="likeMovie(detail_movie.id)">좋아요</button>
-            <h3>{{ detail_movie.title }}</h3>
-            {{ detail_movie.vote_average }} / {{ detail_movie.vote_count }}
-            <br>
-            {{ detail_movie.release_date }}
-            <br>
-            {{ detail_movie.overview }}
-          </div>
-        </div>
-        <iframe width="1000px" height="700px" :src="youtubesrc"></iframe>
+  <div class="MovieDetailPage">
+    <div class="movieCard">
+      <div class="movieimgbox">
+        <img :src="imgurl" class="movieimg">
+        <img src="@/assets/icon/full_heart.png" @click="likeMovie(detail_movie.id)"
+          class="heart" v-if="isLike"
+        >
+        <img src="@/assets/icon/bin_heart.png" @click="likeMovie(detail_movie.id)"
+          class="heart" v-else
+        >
       </div>
+      <div class="title_text">
+          <h3>{{ detail_movie.title }}</h3>
+          {{ star_point }} / {{ detail_movie.vote_count }}
+      </div>
+    </div>
+    <div class="movie_content">
+      {{ detail_movie.release_date }}
+      {{ detail_movie.overview }}
+      <iframe width="1000px" height="700px" :src="youtubesrc"></iframe>
     </div>
   </div>
 </template>
@@ -36,6 +37,8 @@ export default {
     return {
       youtubeId: null,
       youtubesrc: null,
+      star_point: null,
+      isLike: false,
     }
   },
   computed: {
@@ -46,6 +49,8 @@ export default {
   methods: {
     likeMovie(id) {
       this.$store.dispatch('likeMovie', id)
+      this.isLike = !this.isLike
+      console.log(this.isLike)
     },
     getYoutube(id) {
       axios({
@@ -59,14 +64,39 @@ export default {
           this.youtubesrc = youtubesrc
         })
         .catch(err => console.log(err))
+    },
+    star() {
+      this.star_point = Math.round(this.detail_movie.vote_average / 2)
     }
   },
   created() {
     this.getYoutube(this.detail_movie.id)
+    this.star()
   }
 }
 </script>
 
 <style>
+.MovieDetailPage {
+  display: flex;
+}
 
+.movieCard {
+  margin: 7%;
+}
+
+.movieimgbox {
+  position: relative;
+}
+
+.movieimg {
+  border-radius: 0.5rem;
+}
+
+.heart {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  cursor: pointer;
+}
 </style>
