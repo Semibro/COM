@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <div class="ProfileView">
     <div class="userinfo_box">
       <img src="@/assets/gamsung.png" class="profile_pic">
       <div class="user_info">
+        <div class="update_user" @click="sorry">
+          <img src="@/assets/icon/setting.png" class="setting_icon">
+          회원정보 수정
+        </div>
 
-        <div class="user_title">
+        <div class="user_title">     
           <h1> {{ masterOfProfile }} 님</h1>
           <!-- 팔로우 버튼 -->
           <span v-if="user_info.username != masterOfProfile">
@@ -49,19 +53,35 @@
 
 
     <br><br>
-    <div v-for="(movie, index) in like_movie_list" :key="index">
-      {{ movie }}
-      <br><br>
+    <!-- {{ like_movie_list }} -->
+    <div class="userliketitle">
+      <h2> {{ masterOfProfile }} 님이 좋아하는 영화 </h2>
     </div>
+    <div class="movie_list">
+      <PopularMovieList
+        v-for="(movie, index) in like_movie_list" :key="index"
+        :movie="movie"
+      />
+    </div>
+
+    <!-- <PopularMovieList 
+      v-for="(movie, index) in movie_list" :key="index"
+      :movie="movie"
+    /> -->
   </div>
 </template>
 
 <script>
+import PopularMovieList from '../components/PopularMovieList.vue'
+
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'ProfileView',
+  components: {
+    PopularMovieList,
+  },
   data() {
     return {
       like_movie_list: [],
@@ -140,6 +160,9 @@ export default {
           console.log(err)
         })
     },
+    sorry() {
+      alert('준비 중 입니다🙏🏼')
+    }
   },
   created() {
     this.getProfile()
@@ -152,12 +175,17 @@ export default {
 </script>
 
 <style>
+.ProfileView {
+  height: 100vh;
+}
+
 .userinfo_box {
   margin-top: 30px;
   display: flex;
   align-items: center;
   height: 50vh;
   background-color: rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 
 .profile_pic {
@@ -225,5 +253,37 @@ button {
 
 .bold {
   font-weight: bold;
+}
+
+.update_user {
+  position: absolute;
+  right: 7%;
+  top: 10vh;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  cursor: pointer;
+  opacity: 70%;
+}
+
+.update_user:hover {
+  opacity: 1;
+}
+
+.setting_icon {
+  width: 30px;
+  margin: 0 5px;
+}
+
+.movie_list {
+  margin-left: 7%;
+  display: flex;
+  overflow: scroll;
+  /* justify-content: center; */
+}
+
+.userliketitle {
+  text-align: start;
+  margin-left: 7%;
 }
 </style>

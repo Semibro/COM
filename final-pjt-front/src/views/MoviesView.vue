@@ -6,6 +6,7 @@
       ></video>
     </div>
     <div class="none"></div>
+    
     <div class="content_box">
       <h1>취향저격 콘텐츠</h1>
       <div class="ppmovie">

@@ -29,6 +29,11 @@ export default {
 </script>
 
 <style scoped>
+.PopularMovieList {
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
 .movieCard {
   display: flex;
   flex-direction: column;
