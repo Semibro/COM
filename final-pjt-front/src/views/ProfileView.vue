@@ -1,22 +1,40 @@
 <template>
   <div>
     <div class="userinfo_box">
-      <img src="@/assets/gamsung.png">
+      <img src="@/assets/gamsung.png" class="profile_pic">
       <div class="user_info">
-        <h1> {{ masterOfProfile }} 님</h1>
-        <div v-if="user_info.username != masterOfProfile">
-          <div v-if="follow_check">
-            <button @click="followUser(masterOfProfile)">언팔로우</button>
-          </div>
-          <div v-else>
-            <button @click="followUser(masterOfProfile)">팔로우</button>
-          </div>
+
+        <div class="user_title">
+          <h1> {{ masterOfProfile }} 님</h1>
+          <!-- 팔로우 버튼 -->
+          <span v-if="user_info.username != masterOfProfile">
+            <span v-if="follow_check">
+              <button @click="followUser(masterOfProfile)">
+                <span class="iconbox">
+                  <img src="@/assets/icon/cancel.png" class="icon_sm">
+                  <img src="@/assets/icon/cancel_black.png" class="icon_sm follow">
+                </span>
+              </button>
+            </span>
+            <span v-else>
+              <button @click="followUser(masterOfProfile)">
+                <span class="iconbox">
+                  <img src="@/assets/icon/follow.png" class="icon">
+                  <img src="@/assets/icon/follow_black.png" class="icon follow">
+                </span>
+              </button>
+            </span>
+          </span>
+          <!-- 팔로우 버튼 끝 -->
         </div>
+
         <p>팔로워: {{ getFollowingsCount }} 명</p>
         <p>팔로잉: {{ getFollowersCount }} 명</p>
         <p>좋아요한 영화 수 : {{ like_movie_list.length }}</p>
       </div>
     </div>
+
+
     <br><br>
     <div v-for="(movie, index) in like_movie_list" :key="index">
       {{ movie }}
@@ -129,14 +147,54 @@ export default {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.userinfo_box img {
+.profile_pic {
   border-radius: 0.5rem;
   width: 300px;
   height: 300px;
   margin-left: 7%;
 }
 
-button {
-  
+.user_title {
+  margin-left: 40px;
+  display: flex;
+  align-items: center;
 }
+
+button {
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  margin-left: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-radius: 0.5rem;
+  width: 40px;
+}
+
+.iconbox {
+  position: relative;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon_sm {
+  width: 13px;
+}
+
+.follow {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+}
+
+.follow:hover {
+  opacity: 70%;
+}
+
 </style>
