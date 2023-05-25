@@ -135,7 +135,61 @@ type: Subject - body
 
 ## 3-2) 실제 구현 정도
 
-준비중입니다..🙏
+- 회원가입
+
+<img src="./readme_pic/Finish/Fin_Signup.png">
+
+<br>
+
+- 로그인
+
+<img src="./readme_pic/Finish/Fin_Login.png">
+
+<br>
+
+- 홈
+
+<img src="./readme_pic/Finish/Fin_Home1.png">
+
+<img src="./readme_pic/Finish/Fin_Home2.png">
+
+<img src="./readme_pic/Finish/Fin_Home3.png">
+
+<br>
+
+- 영화 리스트
+
+<img src="./readme_pic/Finish/Fin_Movies.png">
+
+<br>
+
+- 영화 상세
+
+<img src="./readme_pic/Finish/Fin_Movie_Detail1.png">
+
+<img src="./readme_pic/Finish/Fin_Movie_Detail2.png">
+
+<img src="./readme_pic/Finish/Fin_Movie_Detail3.png">
+
+<br>
+
+- 영화 리뷰 상세
+
+<img src="./readme_pic/Finish/Fin_Review_Detail1.png">
+
+<img src="./readme_pic/Finish/Fin_Review_Detail2.png">
+
+<br>
+
+- 영화 추천
+
+<img src="./readme_pic/Finish/Fin_Recommend.png">
+
+<br>
+
+- 프로필
+
+<img src="./readme_pic/Finish/Fin_Profile.png">
 
 <br><br>
 
