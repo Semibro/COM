@@ -1,4 +1,5 @@
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -9,11 +10,12 @@ from .models import Movie, Recommend
 
 import requests
 
+
 # Create your views here.
 # api headers
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWI1MTViYzI0Y2I5N2VlMDdkNjU4ZjVmZDBhYTFhNyIsInN1YiI6IjYzZDMxOGY0NjZhZTRkMDA5NmI3M2EwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ryaRC-WBbFQHXdaZjys7Gjrz8AxKGeaj1k6KioWjYWc"
+    "Authorization": settings.SECRET_KEY
 }
 
 movie_id_list = []
@@ -50,9 +52,9 @@ def recommend_movies(movie_id):
     for movie_id in movie_id_list:
         url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
         response = requests.get(url, headers=headers).json()
-        saved_movies = Movie.objects.values_list('id', flat=True)
+        saved_movies = Recommend.objects.values_list('id', flat=True)
         for result in response['results']:
-            if result['id'] not in saved_movies:
+            if result['id'] not in saved_movies and result['poster_path']:
                 try:
                     recommend = Recommend(
                     id = result['id'],
