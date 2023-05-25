@@ -3,17 +3,6 @@
     <div class="movieCard">
       <div class="movieimgbox">
         <img :src="imgurl" class="movieimg">
-        <img src="@/assets/icon/full_heart.png" @click="likeMovie(movie.id)"
-          class="heart" v-if="isLike"
-        >
-        <div class="heart" v-else>
-          <img src="@/assets/icon/bin_heart.png" @click="likeMovie(movie.id)"
-            class="bin_heart"
-          >
-          <img src="@/assets/icon/full_heart.png" @click="likeMovie(movie.id)"
-            class="full_heart"
-          >
-        </div>
       </div>
       <div class="title_text">
         <div class="only_title">
@@ -102,20 +91,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <span class="pointer" @click="toProfile(review.user)">{{ review.user }}</span>
-    {{ review.content }}
-    <div v-if="this.$route.params.user_id === this.user_info.pk">
-      <button @click="deleteReview(review.id)">DELETE</button>
-    </div>
-    <form @submit.prevent="createComment">
-      <label for="content">내용 : </label>
-      <input type="text" v-model="inputdata">
-    </form>
-    <div v-for="(comment, index) in comments" :key="index">
-      <span class="pointer" @click="toProfile(comment.user)">{{ comment.user }}</span> : {{ comment.content }}
-      <button @click="deleteComment(comment.id)">DELETE</button>
-    </div> -->
   </div>
 </template>
 
@@ -131,7 +106,6 @@ export default {
       inputdata: null,
       comments: null,
       movie: null,
-      isLike: false,
       star_point: null,
     }
   },
@@ -245,25 +219,8 @@ export default {
         }
       })
     },
-    likeMovie(id) {
-      this.$store.dispatch('likeMovie', id)
-      this.isLike = !this.isLike
-    },
     star() {
       this.star_point = Math.round(this.movie.vote_average / 2)
-    },
-    heart() {
-      const user = this.user_info.pk
-      let flag = 1
-      this.detail_movie.like_users.forEach(user_id => {
-        if (user_id === user) {
-          flag = 2
-          this.isLike = true
-        }
-      })
-      if (flag === 1) {
-        this.isLike = false
-      }
     },
   },
   created() {
@@ -272,7 +229,6 @@ export default {
     this.$store.dispatch('getUserInfo')
     this.getMovie()
     this.star()
-    this.heart()
   }
 }
 </script>
@@ -297,28 +253,6 @@ export default {
 
 .movieimg {
   border-radius: 0.5rem;
-}
-.heart {
-  position: absolute;
-  top: 2%;
-  right: 3%;
-  cursor: pointer;
-}
-
-.bin_heart {
-  position: relative;
-}
-
-.full_heart {
-  position: absolute;
-  top: 2%;
-  right: 3%;
-  opacity: 0;
-}
-
-.heart:hover > .full_heart {
-  opacity: 1;
-  transition: opacity 0.3s;
 }
 
 .star {
