@@ -58,12 +58,38 @@
         </div>
       </div>
     </div>
+
     <div class="movie_content_wrap">
       <div class="movie_content">
-        <h2> {{ review.content }} </h2>
-        <div v-if="this.$route.params.user_id === this.user_info.pk">
-          <button @click="deleteReview(review.id)">DELETE</button>
+
+
+        
+        <div class="review_detail">
+          <div class="review_title">
+            <h2> {{ review.content }} </h2>
+
+            <!-- 쓰레기통 -->
+            <div v-if="this.$route.params.user_id === this.user_info.pk">
+              <button @click="deleteReview(review.id)">
+                <span class="bin">
+                    <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
+                    <img src="@/assets/icon/bin_white.png"
+                      style="width: 17px; opacity: 70%;" class="bin_white"
+                    >
+                  </span>
+              </button>
+            </div>
+              <!-- 쓰레기통 끝 -->
+          </div>
+
+          <div>
+            작성자 : {{ review.user }}
+          </div>
         </div>
+
+
+
+
         <div class="createReviewForm">
           <h2>
             <img src="@/assets/icon/pencil.png" class="icon">
@@ -80,15 +106,23 @@
           <br>
           <div v-for="(comment, index) in comments" :key="index" class="reviewbox">
             <span class="username" @click="toProfile(comment.user)">{{ comment.user }}</span> :
-            <span @click="toReviewDetail(review.id, review.user_id)" class="review_content">
+            <span class="review_content">
               {{ comment.content }}
             </span>
-            <button @click="deleteComment(comment.id)">DELETE</button>
             <span class="created_at">
-              {{ review.created_at.substr(0, 10) }}
+              {{ comment.created_at.substr(0, 10) }}
             </span>
+            <button @click="deleteComment(comment.id)">
+              <span class="bin">
+                <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
+                <img src="@/assets/icon/bin_white.png"
+                  style="width: 17px; opacity: 70%;" class="bin_white"
+                >
+              </span>
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -344,15 +378,38 @@ select {
 
 .created_at {
   opacity: 40%;
-}
-
-.review_content:hover {
-  color: rgb(48, 48, 48);
-  cursor: pointer;
-  font-weight: bold;
+  margin: 0 10px;
 }
 
 .review_form_box {
   display: flex;
+}
+
+button {
+  border: 0;
+  border-radius: 0.5rem;
+  width: 30px;
+  height: 20px;
+  background-color: transparent;
+}
+
+.bin {
+  position: relative;
+  cursor: pointer;
+}
+
+.bin_white {
+  position: absolute;
+  left: 0;
+  display: none;
+}
+
+.bin:hover .bin_white{
+  display: inherit;
+}
+
+.review_title {
+  display: flex;
+  align-items: center;
 }
 </style>
