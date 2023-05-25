@@ -21,7 +21,7 @@ headers = {
 movie_id_list = []
 
 # movie / detail / credit / recommend
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def movie_list(request):
     for page in range(1, 6):
         url = f"https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}"
@@ -47,7 +47,7 @@ def movie_list(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def recommend_movies(request, movie_id):
     url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
     response = requests.get(url, headers=headers).json()

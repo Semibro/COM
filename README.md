@@ -151,24 +151,27 @@ type: Subject - body
 |---|---|---|
 ||`admin`|admin.site.urls|
 ||`movies/`|include('movies.urls')|
-||`accounts/`|include('accounts.urls')|
+||`accounts/`|include('dj_rest_auth.urls')|
+||`profile/`|include('accounts.urls)|
+||`accounts/signup/`|include('dj_rest_auth.registration.urls')|
+||`api/token/`|TokenObtainPairView.as_view()|
 
 **movies url**
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
 |GET|`movies/`|영화 페이지|
-|GET|`movies/<int:movie_pk>/`|단일 영화 조회|
-|POST|`movies/<int:movie_pk>/reviews/`|리뷰 작성|
-|GET PUT DELETE|`movies/reviews/<int:review_pk>`|리뷰 상세 페이지|
+|GET|`movies/recommend/<int:movie_id>/`|좋아요한 영화 기반 추천 페이지|
+|GET POST|`movies/<int:movie_pk>/reviews/`|단일 영화 조회 및 리뷰 작성 페이지|
+|GET PUT DELETE|`movies/<int:movie_pk>/<int:review_pk>/`|리뷰 상세 및 댓글 작성 페이지|
+|GET POST|`movies/<int:movie_pk>/<int:review_pk>/comment/`|댓글 상세 및 작성 페이지|
+|DELETE|`movies/<int:movie_pk>/<int:review_pk>/comment/<int:comment_pk>/`|댓글 삭제|
+|POST|`movies/<int:movie_pk>/likes/`|영화 좋아요|
 
 **accounts url**
 |HTTP verb|URL 패턴|설명|
 |---|---|---|
-|GET POST|`accounts/signup/`|회원가입 페이지|
-|GET POST|`accounts/login/`|로그인 페이지|
-|POST|`accounts/logout/`|로그아웃|
-||`accounts/profile/<username>/`|유저 프로필 페이지|
-|POST|`accounts/<int:user_pk>/follow/`|유저 팔로우|
+|GET|`profile/<username>/`|회원 프로필 페이지|
+|POST|`profile/follow/`|팔로우|
 
 <br><br>
 
