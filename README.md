@@ -149,11 +149,7 @@ type: Subject - body
 
 - 홈
 
-<img src="./readme_pic/Finish/Fin_Home1.png">
-
-<img src="./readme_pic/Finish/Fin_Home2.png">
-
-<img src="./readme_pic/Finish/Fin_Home3.png">
+<img src="./readme_pic/Finish/Fin_Home.png">
 
 <br>
 
@@ -165,19 +161,13 @@ type: Subject - body
 
 - 영화 상세
 
-<img src="./readme_pic/Finish/Fin_Movie_Detail1.png">
-
-<img src="./readme_pic/Finish/Fin_Movie_Detail2.png">
-
-<img src="./readme_pic/Finish/Fin_Movie_Detail3.png">
+<img src="./readme_pic/Finish/Fin_Movie_Detail.png">
 
 <br>
 
 - 영화 리뷰 상세
 
-<img src="./readme_pic/Finish/Fin_Review_Detail1.png">
-
-<img src="./readme_pic/Finish/Fin_Review_Detail2.png">
+<img src="./readme_pic/Finish/Fin_Review_Detail.png">
 
 <br>
 
