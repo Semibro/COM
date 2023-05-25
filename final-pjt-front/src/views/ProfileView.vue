@@ -11,6 +11,7 @@
           <button @click="followUser(masterOfProfile)">팔로우</button>
         </div>
         <p>팔로워: {{ getFollowingsCount }} 명 </p>
+        <p>좋아요한 영화 수 : {{ like_movie_list.length }}</p>
       </div>
     </div>
     <br><br>
