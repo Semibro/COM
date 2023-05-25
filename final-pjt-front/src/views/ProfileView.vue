@@ -63,10 +63,9 @@ export default {
   methods: {
     is_follow() {
       const user = this.$store.state.user_info
-      console.log(user)
       let flag = 1
-      this.profile_data.followings.forEach(follower => {
-        if (follower === user.pk) {
+      this.real_user_info.followings.forEach(follower => {
+        if (follower.id === user.pk) {
           this.follow_check = true
           flag = 2
         }
@@ -85,7 +84,6 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
           this.real_user_info = res.data
           this.like_movie_list = res.data.like_movies
           this.is_follow()
@@ -104,7 +102,6 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
           this.profile_data = res.data
           this.getProfile()
         })
@@ -116,17 +113,10 @@ export default {
   created() {
     this.getProfile()
     this.$store.dispatch('getUserInfo')
-    const followCheck = localStorage.getItem('follow_check')
-    this.follow_check = followCheck === 'true'
   },
   mounted() {
-    this.getProfile()
+    this.is_follow()
   },
-  watch: {
-    follow_check(newVal) {
-      localStorage.setItem('follow_check', newVal)
-    }
-  }
 }
 </script>
 
