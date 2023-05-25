@@ -93,7 +93,7 @@ export default {
 
 .none {
   visibility: hidden;
-  height: 390px;
+  height: 375px;
 }
 
 .ppmovie {
