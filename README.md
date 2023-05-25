@@ -140,7 +140,7 @@ type: Subject - body
 <br><br>
 
 ## 4-1) 데이터베이스 모델링(ERD)
-<img src="./readme_pic/Final_PJT_ERD.png" style="width: 500px ">
+<img src="./readme_pic/Final_PJT_ERD.jpg" style="width: 500px ">
 
 <br>
 
