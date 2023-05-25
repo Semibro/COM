@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>영화 추천 페이지</h1>
-    <p>{{ userinfo.username }}님이 좋아할 만한 영화를 골라봤어요!</p>
+    <p>{{ userinfo.username }}님이 좋아한 {{ selected_movie[0].title }}과 비슷한 영화를 골라봤어요!</p>
     <br>
     <div v-for="(movie, index) in recm_movie" :key="index">
       {{ movie.poster_path }}
@@ -20,6 +20,8 @@ export default {
       recm_movie: [],
       like_movie: [],
       movieId: null,
+      selected_movie: [],
+
     }
   },
   computed: {
@@ -47,9 +49,8 @@ export default {
           }
         })
       })
-      const selected_movie = _.sampleSize(lst, 1)
-      console.log(selected_movie[0].id)
-      return selected_movie[0].id
+      this.selected_movie = _.sampleSize(lst, 1)
+      return this.selected_movie[0].id
     }
   },
   created() {
