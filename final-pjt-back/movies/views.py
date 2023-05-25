@@ -10,6 +10,7 @@ from .models import Movie, Recommend
 
 import requests
 
+
 # Create your views here.
 # api headers
 headers = {
@@ -51,9 +52,9 @@ def recommend_movies(movie_id):
     for movie_id in movie_id_list:
         url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
         response = requests.get(url, headers=headers).json()
-        saved_movies = Movie.objects.values_list('id', flat=True)
+        saved_movies = Recommend.objects.values_list('id', flat=True)
         for result in response['results']:
-            if result['id'] not in saved_movies:
+            if result['id'] not in saved_movies and result['poster_path']:
                 try:
                     recommend = Recommend(
                     id = result['id'],
