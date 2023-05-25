@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .serializers import *
-from .models import Movie, Review, Comment
+from .models import Movie, Recommend
 
 import requests
 
@@ -16,6 +16,7 @@ headers = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWI1MTViYzI0Y2I5N2VlMDdkNjU4ZjVmZDBhYTFhNyIsInN1YiI6IjYzZDMxOGY0NjZhZTRkMDA5NmI3M2EwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ryaRC-WBbFQHXdaZjys7Gjrz8AxKGeaj1k6KioWjYWc"
 }
 
+movie_id_list = []
 
 # movie / detail / credit / recommend
 @api_view(['GET', 'POST'])
@@ -25,6 +26,7 @@ def movie_list(request):
         response = requests.get(url, headers=headers).json()
         saved_movies = Movie.objects.values_list('id', flat=True)
         for result in response['results']:
+            movie_id_list.append(result['id'])
             if result['id'] not in saved_movies:
                 try:
                     movie = Movie(
@@ -40,6 +42,31 @@ def movie_list(request):
                     pass
     movies = get_list_or_404(Movie)
     serializer = PopularMovieListSerializer(movies, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def recommend_movies(movie_id):
+    for movie_id in movie_id_list:
+        url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
+        response = requests.get(url, headers=headers).json()
+        saved_movies = Movie.objects.values_list('id', flat=True)
+        for result in response['results']:
+            if result['id'] not in saved_movies:
+                try:
+                    recommend = Recommend(
+                    id = result['id'],
+                    title=result['title'],
+                    overview=result['overview'],
+                    poster_path=result['poster_path'],
+                    release_date=result['release_date'],
+                    vote_average=result['vote_average'],
+                    vote_count=result['vote_count'])
+                    recommend.save()
+                except:
+                    pass
+    recommends = get_list_or_404(Recommend)
+    serializer = RecommendMovieListSerializer(recommends, many=True)
     return Response(serializer.data)
 
 

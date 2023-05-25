@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Review, Comment
+from .models import Movie, Review, Comment, Recommend
 from accounts.models import User
 
 
@@ -15,6 +15,19 @@ class PopularMovieListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
+        fields = '__all__'
+
+
+class RecommendMovieListSerializer(serializers.ModelSerializer):
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = User
+            fields = '__all__'
+
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Recommend
         fields = '__all__'
 
 

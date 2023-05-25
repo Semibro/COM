@@ -16,6 +16,7 @@ export default new Vuex.Store({
     popularMovies: null,
     detail_movie: null,
     user_info: null, // 현재 로그인한 유저 정보
+    recommendMovies: null,
   },
   getters: {
   },
@@ -56,6 +57,10 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    GET_RECOMMEND_MOVIES(state, recommends) {
+      console.log(recommends)
+      state.recommendMovies = recommends
+    }
   },
   actions: {
     signUp(context, payload) {
@@ -109,6 +114,20 @@ export default new Vuex.Store({
     likeMovie(context, id) {
       context.commit('LIKE_MOVIE', id)
     },
+    getRecommendMovies(context) {
+      const token = localStorage.getItem('jwt')
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/recommend/`,
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
+      })
+        .then(res => {
+          context.commit('GET_RECOMMEND_MOVIES', res.data)
+        })
+        .catch(err => console.log(err))
+    }
   },
   modules: {
   }
