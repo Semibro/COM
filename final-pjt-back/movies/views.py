@@ -1,4 +1,5 @@
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.conf import settings
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -13,7 +14,7 @@ import requests
 # api headers
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYWI1MTViYzI0Y2I5N2VlMDdkNjU4ZjVmZDBhYTFhNyIsInN1YiI6IjYzZDMxOGY0NjZhZTRkMDA5NmI3M2EwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ryaRC-WBbFQHXdaZjys7Gjrz8AxKGeaj1k6KioWjYWc"
+    "Authorization": settings.SECRET_KEY
 }
 
 movie_id_list = []

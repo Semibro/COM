@@ -28,9 +28,22 @@
           <!-- 팔로우 버튼 끝 -->
         </div>
 
-        <p>팔로워: {{ getFollowingsCount }} 명</p>
-        <p>팔로잉: {{ getFollowersCount }} 명</p>
-        <p>좋아요한 영화 수 : {{ like_movie_list.length }}</p>
+        <div class="insta_st">
+          <div class="tap">
+            <p class="no_margin bold">{{ like_movie_list.length }}</p>
+            <p class="no_margin">좋아요</p>
+          </div>
+          <div class="tap">
+            <p class="no_margin bold">{{ getFollowingsCount }}</p>
+            <p class="no_margin">팔로워</p>
+          </div>
+          <div class="tap">
+            <p class="no_margin bold">{{ getFollowersCount }}</p>
+            <p class="no_margin">팔로잉</p>
+          </div>
+          
+        </div>
+
       </div>
     </div>
 
@@ -143,7 +156,7 @@ export default {
   margin-top: 30px;
   display: flex;
   align-items: center;
-  height: 60vh;
+  height: 50vh;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -197,4 +210,20 @@ button {
   opacity: 70%;
 }
 
+.insta_st {
+  display: flex;
+  margin-left: 21px;
+}
+
+.tap {
+  margin: 0 15px;
+}
+
+.no_margin {
+  margin: 0;
+}
+
+.bold {
+  font-weight: bold;
+}
 </style>
