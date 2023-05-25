@@ -9,6 +9,7 @@
         <span v-if="isLogin" class="menu">
           <router-link to="/home">Home</router-link>
           <router-link to="/movies">Movies</router-link>
+          <router-link to="/recommend">Recommend</router-link>
           <router-link :to="{ name: 'profile', params: { username: username } }">Profile</router-link>
           <router-link to="/#" @click.native="logout">Logout</router-link>
         </span>
