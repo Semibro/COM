@@ -24,7 +24,13 @@ class RecommendMovieListSerializer(serializers.ModelSerializer):
             model = User
             fields = '__all__'
 
+    class MovieSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Movie
+            fields = '__all__'
+
     user = UserSerializer(read_only=True)
+    movie = MovieSerializer(read_only=True, many=True)
 
     class Meta:
         model = Recommend

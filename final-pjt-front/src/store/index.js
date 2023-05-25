@@ -114,11 +114,12 @@ export default new Vuex.Store({
     likeMovie(context, id) {
       context.commit('LIKE_MOVIE', id)
     },
-    getRecommendMovies(context) {
+    getRecommendMovies(context, movieId) {
       const token = localStorage.getItem('jwt')
+
       axios({
         method: 'get',
-        url: `${API_URL}/movies/recommend/`,
+        url: `${API_URL}/movies/recommend/${movieId}`,
         headers: {
           Authorization: `Bearer ${ token }`
         }

@@ -48,25 +48,24 @@ def movie_list(request):
 
 
 @api_view(['GET', 'POST'])
-def recommend_movies(movie_id):
-    for movie_id in movie_id_list:
-        url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
-        response = requests.get(url, headers=headers).json()
-        saved_movies = Recommend.objects.values_list('id', flat=True)
-        for result in response['results']:
-            if result['id'] not in saved_movies and result['poster_path']:
-                try:
-                    recommend = Recommend(
-                    id = result['id'],
-                    title=result['title'],
-                    overview=result['overview'],
-                    poster_path=result['poster_path'],
-                    release_date=result['release_date'],
-                    vote_average=result['vote_average'],
-                    vote_count=result['vote_count'])
-                    recommend.save()
-                except:
-                    pass
+def recommend_movies(request, movie_id):
+    url = f'https://api.themoviedb.org/3/movie/{movie_id}/recommendations?language=ko-KR&page=1'
+    response = requests.get(url, headers=headers).json()
+    saved_movies = Recommend.objects.values_list('id', flat=True)
+    for result in response['results']:
+        if result['id'] not in saved_movies and result['poster_path'] and result['overview']:
+            try:
+                recommend = Recommend(
+                id = result['id'],
+                title=result['title'],
+                overview=result['overview'],
+                poster_path=result['poster_path'],
+                release_date=result['release_date'],
+                vote_average=result['vote_average'],
+                vote_count=result['vote_count'])
+                recommend.save()
+            except:
+                pass
     recommends = get_list_or_404(Recommend)
     serializer = RecommendMovieListSerializer(recommends, many=True)
     return Response(serializer.data)
