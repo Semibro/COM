@@ -65,7 +65,7 @@ export default {
 .mermaid_video {
   /* margin-top: 50px; */
   position: absolute;
-  top: -110px;
+  top: -115px;
   height: 510px;
   overflow: hidden;
 }

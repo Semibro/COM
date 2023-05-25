@@ -168,7 +168,7 @@ export default {
 }
 
 .user_title {
-  margin-left: 40px;
+  margin-left: 50px;
   display: flex;
   align-items: center;
 }
@@ -212,7 +212,7 @@ button {
 
 .insta_st {
   display: flex;
-  margin-left: 21px;
+  margin-left: 30px;
 }
 
 .tap {
