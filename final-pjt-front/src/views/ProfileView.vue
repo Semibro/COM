@@ -145,4 +145,8 @@ export default {
   height: 300px;
   margin-left: 7%;
 }
+
+button {
+  
+}
 </style>
