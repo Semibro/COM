@@ -66,10 +66,10 @@
         
         <div class="review_detail">
           <div class="review_title">
-            <h2> {{ review.content }} </h2>
+            <h1> {{ review.content }} </h1>
 
             <!-- 쓰레기통 -->
-            <div v-if="this.$route.params.user_id === this.user_info.pk">
+            <div v-if="review.user === user_info.username">
               <button @click="deleteReview(review.id)">
                 <span class="bin">
                     <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
@@ -82,8 +82,55 @@
               <!-- 쓰레기통 끝 -->
           </div>
 
-          <div>
+          <div style="line-height: 35px">
             작성자 : {{ review.user }}
+            <br>
+            평점:
+            <span class="point_5" v-if="review.rate===5">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+            </span>
+            <span class="point_4" v-if="review.rate===4">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+            </span>
+            <span class="point_3" v-if="review.rate===3">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+            </span>
+            <span class="point_2" v-if="review.rate===2">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+            </span>
+            <span class="point_1" v-if="review.rate===1">
+              <img src="@/assets/icon/full_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+            </span>
+            <span class="point_0" v-if="review.rate===0">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+              <img src="@/assets/icon/bin_star.png" class="star_user">
+            </span>
+            <br>
+            작성일자: {{ review.created_at.substr(0, 10) }}
+            <br><br>
           </div>
         </div>
 
@@ -112,14 +159,20 @@
             <span class="created_at">
               {{ comment.created_at.substr(0, 10) }}
             </span>
-            <button @click="deleteComment(comment.id)">
-              <span class="bin">
-                <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
-                <img src="@/assets/icon/bin_white.png"
-                  style="width: 17px; opacity: 70%;" class="bin_white"
-                >
-              </span>
-            </button>
+
+            <!-- 댓글 쓰레기통 -->
+            <span v-if="comment.user === user_info.username">
+              <button @click="deleteComment(comment.id)">
+                <span class="bin">
+                  <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
+                  <img src="@/assets/icon/bin_white.png"
+                    style="width: 17px; opacity: 70%;" class="bin_white"
+                  >
+                </span>
+              </button>
+            </span>
+            <!-- 댓글 쓰레기통 끝 -->
+
           </div>
         </div>
 
@@ -263,7 +316,7 @@ export default {
     this.$store.dispatch('getUserInfo')
     this.getMovie()
     this.star()
-  }
+  },
 }
 </script>
 
@@ -408,8 +461,18 @@ button {
   display: inherit;
 }
 
+.review_detail {
+  margin-left: 2%;
+}
+
 .review_title {
   display: flex;
   align-items: center;
 }
+
+.review_title h1 {
+  margin-right: 20px;
+}
+
+
 </style>
