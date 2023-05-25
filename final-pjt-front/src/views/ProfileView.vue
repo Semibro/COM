@@ -279,11 +279,15 @@ button {
   margin-left: 7%;
   display: flex;
   overflow: scroll;
-  /* justify-content: center; */
 }
 
 .userliketitle {
   text-align: start;
   margin-left: 7%;
+}
+
+.userliketitle h2 {
+  margin: 0;
+  padding: 0;
 }
 </style>
