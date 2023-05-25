@@ -83,7 +83,7 @@
           </div>
 
           <div style="line-height: 35px">
-            작성자 : {{ review.user }}
+            작성자 : <span class="username" @click="toProfile(review.user)">{{ review.user }}</span>
             <br>
             평점:
             <span class="point_5" v-if="review.rate===5">
