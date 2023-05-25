@@ -71,12 +71,12 @@
             <!-- 쓰레기통 -->
             <div v-if="review.user === user_info.username">
               <button @click="deleteReview(review.id)">
-                <span class="bin">
+                <div class="bin">
                     <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
                     <img src="@/assets/icon/bin_white.png"
                       style="width: 17px; opacity: 70%;" class="bin_white"
                     >
-                  </span>
+                  </div>
               </button>
             </div>
               <!-- 쓰레기통 끝 -->
@@ -163,12 +163,12 @@
             <!-- 댓글 쓰레기통 -->
             <span v-if="comment.user === user_info.username">
               <button @click="deleteComment(comment.id)">
-                <span class="bin">
+                <div class="bin">
                   <img src="@/assets/icon/bin.png" style="width: 17px; opacity: 70%;">
                   <img src="@/assets/icon/bin_white.png"
                     style="width: 17px; opacity: 70%;" class="bin_white"
                   >
-                </span>
+                </div>
               </button>
             </span>
             <!-- 댓글 쓰레기통 끝 -->
@@ -454,6 +454,7 @@ button {
 .bin_white {
   position: absolute;
   left: 0;
+  top: 0;
   display: none;
 }
 
