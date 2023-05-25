@@ -10,7 +10,8 @@
         <div v-else>
           <button @click="followUser(masterOfProfile)">팔로우</button>
         </div>
-        <p>팔로워: {{ getFollowingsCount }} 명 </p>
+        <p>팔로워: {{ getFollowingsCount }} 명</p>
+        <p>팔로잉: {{ getFollowersCount }} 명</p>
         <p>좋아요한 영화 수 : {{ like_movie_list.length }}</p>
       </div>
     </div>
@@ -50,6 +51,12 @@ export default {
       }
       return 0;
     },
+    getFollowersCount() {
+      if (this.real_user_info && this.real_user_info.followers) {
+        return this.real_user_info.followers.length;
+      }
+      return 0;
+    },
   },
   methods: {
     is_follow() {
@@ -76,6 +83,7 @@ export default {
         },
       })
         .then(res => {
+          console.log(res)
           this.real_user_info = res.data
           this.like_movie_list = res.data.like_movies
           this.is_follow()
