@@ -7,7 +7,7 @@
       </span>
       <nav>
         <span v-if="isLogin" class="menu">
-          <router-link to="/">Home</router-link>
+          <router-link to="/home">Home</router-link>
           <router-link to="/movies">Movies</router-link>
           <router-link :to="{ name: 'profile', params: { username: username } }">Profile</router-link>
           <router-link to="/#" @click.native="logout">Logout</router-link>
@@ -15,7 +15,7 @@
 
         <span v-else>
           <router-link to="/login">Login</router-link>
-          <router-link to="/signup">Signup</router-link>
+          <router-link to="/">Signup</router-link>
         </span>
       </nav>
     </div>
