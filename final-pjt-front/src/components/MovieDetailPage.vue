@@ -168,7 +168,7 @@
 <script>
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
-const API_KEY = 'cab515bc24cb97ee07d658f5fd0aa1a7'
+const API_KEY = 'api_key'
 
 export default {
   name: 'MovieDetailPage',
